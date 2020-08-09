@@ -114,7 +114,9 @@ echo -e "${PURPLE}     Step 8: Delete temporary downloads folder${NONE}"
 echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
 # Delete temporary downloads folder
+echo -e "${PURPLE}     (1/1) Deleting temporary downloads folder ${NONE}"
 rm -r ~/swtor_tmp/
+sleep 1
 
 echo
 echo -e "${PURPLE}     SWTOR On Mac Installation Finished Successfully!${NONE}"
