@@ -7,8 +7,17 @@ echo
 echo -e "${PURPLE}     AgentRG's SWTOR On Mac${NONE}" 
 
 sleep 1
+
 echo
-echo -e "${PURPLE}     Step 1: Install Homebrew packages${NONE}"
+echo -e "${PURPLE}     Step 1: Create temporary downloads folder${NONE}"
+echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+
+# Create temporary downloads folder for execuatbles and icon
+echo -e "${PURPLE}     (1/1) Creating temporary downloads folder${NONE}"
+mkdir ~/swtor_tmp
+
+echo
+echo -e "${PURPLE}     Step 2: Install Homebrew packages${NONE}"
 echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
 # Install Wget
@@ -36,7 +45,7 @@ echo -e "${PURPLE}     (5/5) Installing Winetricks${NONE}"
 brew install winetricks &&
 
 echo
-echo -e "${PURPLE}     Step 2: Create custom Wine prefix${NONE}"
+echo -e "${PURPLE}     Step 3: Create custom Wine prefix${NONE}"
 echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
 # Create a new Wine prefix titled "SWTOR On Mac"
@@ -44,7 +53,7 @@ echo -e "${PURPLE}     (1/1) Creating "SWTOR On Mac" Wine prefix${NONE}"
 WINEARCH=win64 WINEPREFIX=~/"SWTOR On Mac" wine wineboot> /dev/null 2>&1 &&
 
 echo
-echo -e "${PURPLE}     Step 3: Install DLLs to prefix${NONE}"
+echo -e "${PURPLE}     Step 4: Install DLLs to prefix${NONE}"
 echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
 # Install vcrun2008
@@ -60,7 +69,7 @@ echo -e "${PURPLE}     (3/3) Installing d3dx9_36${NONE}"
 env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q d3dx9_36> /dev/null 2>&1  &&
 
 echo
-echo -e "${PURPLE}     Step 4: Change prefix settings${NONE}"
+echo -e "${PURPLE}     Step 5: Change prefix settings${NONE}"
 echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
 # Set VRAM to 1024
@@ -72,22 +81,42 @@ echo -e "${PURPLE}     (2/2) Switching Windows version to 10${NONE}"
 env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q win10> /dev/null 2>&1 &&
 
 echo
-echo -e "${PURPLE}     Step 5: Download executables and move to prefix folder${NONE}"
-echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
+echo -e "${PURPLE}     Step 6: Download executables and icon${NONE}"
+echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
-# Download SWTOR_setup.exe and swtor_fix.exe
+# Download SWTOR_setup.exe, swtor_fix.exe and swtor_icon.icns
+cd ~/swtor_tmp/
 echo -e "${PURPLE}     (1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
 wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe -q &&
 echo -e "${PURPLE}     (2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
 wget -q -O SWTOR_setup.exe http://www.swtor.com/download -q &&
+echo -e "${PURPLE}     (3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac"
+wget -q -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
+cd ~/
 
-# Move SWTOR_Setup.exe and swtor_fix.exe to Program Files (x86) folder
-echo -e "${PURPLE}     (3/3) Moving executables to prefix folder${NONE}"
-mv ~/swtor_fix.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/ && mv ~/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/ &&
+echo
+echo -e "${PURPLE}     Step 7: Move executables and icon and move to prefix folder${NONE}"
+echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+
+# Move "SWTOR_Setup.exe, swtor_fix.exe and swtor_icon.icns to Program Files (x86) folder"
+echo -e "${PURPLE}     (1/3) Moving swtor_fix.exe to prefix folder${NONE}"
+mv ~/swtor_tmp/swtor_fix.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+echo -e "${PURPLE}     (2/3) Moving SWTOR_setup.exe to prefix folder${NONE}"
+mv ~/swtor_tmp/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+echo -e "${PURPLE}     (3/3) Moving swtor_icon.icns to prefix folder${NONE}"
+mv ~/swtor_tmp/swtor_icon.icns ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+
+echo
+echo -e "${PURPLE}     Step 8: Delete temporary downloads folder${NONE}"
+echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+
+# Delete temporary downloads folder
+rm -r ~/swtor_tmp/
+
 echo
 echo -e "${PURPLE}     SWTOR On Mac Installation Finished Successfully!${NONE}"
 
-#Launch SWTOR_Setup.exe
+# Launch SWTOR_Setup.exe
 sleep 2
 echo
 echo -e "${PURPLE}     Launching SWTOR_setup.exe...${NONE}"
