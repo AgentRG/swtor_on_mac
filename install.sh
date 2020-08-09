@@ -75,19 +75,19 @@ echo
 echo -e "${PURPLE}     Step 5: Download executables and move to prefix folder${NONE}"
 echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-# Pull the swtor launcher and swtor_fix.exe (required to run SWTOR) from repository to home directory
+# Download SWTOR_setup.exe and swtor_fix.exe
 echo -e "${PURPLE}     (1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
 wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe -q &&
 echo -e "${PURPLE}     (2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
 wget -q -O SWTOR_setup.exe http://www.swtor.com/download -q &&
 
-# Move swtor_fix.exe to Program Files (x86) folder
+# Move SWTOR_Setup.exe and swtor_fix.exe to Program Files (x86) folder
 echo -e "${PURPLE}     (3/3) Moving executables to prefix folder${NONE}"
 mv ~/swtor_fix.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/ && mv ~/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/ &&
 echo
 echo -e "${PURPLE}     SWTOR On Mac Installation Finished Successfully!${NONE}"
 
-#Launch swtor setup launcher
+#Launch SWTOR_Setup.exe
 sleep 2
 echo
 echo -e "${PURPLE}     Launching SWTOR_setup.exe...${NONE}"
