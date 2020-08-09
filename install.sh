@@ -14,6 +14,7 @@ echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ �
 
 # Create temporary downloads folder for execuatbles and icon
 echo -e "${PURPLE}     (1/1) Creating temporary downloads folder${NONE}"
+sleep 1
 mkdir ~/swtor_tmp
 
 echo
@@ -31,7 +32,7 @@ brew install cask &&
 
 # Install XQuartz
 echo
-echo -e "${PURPLE}     (3/5) Installing XQuartz${NONE}"
+echo -e "${PURPLE}     (3/5) Installing XQuartz (Might take a while)${NONE}"
 brew cask install xquartz &&
 
 # Install Wine
@@ -93,6 +94,7 @@ wget -q -O SWTOR_setup.exe http://www.swtor.com/download -q &&
 echo -e "${PURPLE}     (3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac"
 wget -q -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
 cd ~/
+sleep 1
 
 echo
 echo -e "${PURPLE}     Step 7: Move executables and icon and move to prefix folder${NONE}"
@@ -105,6 +107,7 @@ echo -e "${PURPLE}     (2/3) Moving SWTOR_setup.exe to prefix folder${NONE}"
 mv ~/swtor_tmp/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 echo -e "${PURPLE}     (3/3) Moving swtor_icon.icns to prefix folder${NONE}"
 mv ~/swtor_tmp/swtor_icon.icns ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+sleep 1
 
 echo
 echo -e "${PURPLE}     Step 8: Delete temporary downloads folder${NONE}"
