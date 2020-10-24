@@ -131,17 +131,10 @@ install () {
 echo
 echo -e "${PURPLE}     AgentRG's SWTOR On Mac ${NONE}"
 
-tools_version=$(xcode-select -p)
-tools_installed="/Library/Developer/CommandLineTools"
-
 # Check if Command Line Tools are installed followed by if Homebrew is installed
 # If either isn't installed, the script will quit
-if [ "$tools_version" = "$tools_installed" ]; then
-        if [[ $(command -v brew) == "" ]]; then
-                echo -e "${RED}     ERROR: Homebrew not installed. Existing.${NONE}"          
-        else
-                install
-        fi
-else
-        echo -e "${RED}     ERROR: Command Line Tools not installed. Existing.${NONE}"
-fi
+if [[ $(command -v brew) == "" ]]; then
+  echo -e "${RED}     ERROR: Homebrew not installed. Existing.${NONE}"
+  else
+    install
+    fi
