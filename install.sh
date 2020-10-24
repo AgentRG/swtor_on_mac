@@ -86,14 +86,14 @@ install () {
 	echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
 	# Download SWTOR_setup.exe, swtor_fix.exe and swtor_icon.icns
-	cd ~/swtor_tmp/
+	cd ~/swtor_tmp/ || exit
 	echo -e "${PURPLE}     (1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
 	wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe -q &&
 	echo -e "${PURPLE}     (2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
 	wget -q -O SWTOR_setup.exe http://www.swtor.com/download -q &&
 	echo -e "${PURPLE}     (3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac"
 	wget -q -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
-	cd ~/
+	cd ~/ || exit
 	sleep 1
 
 	echo
