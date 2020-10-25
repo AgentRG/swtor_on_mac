@@ -134,7 +134,7 @@ echo -e "${PURPLE}     AgentRG's SWTOR On Mac ${NONE}"
 # Check if Command Line Tools are installed followed by if Homebrew is installed
 # If either isn't installed, the script will quit
 if [[ $(command -v brew) == "" ]]; then
-  echo -e "${RED}     ERROR: Homebrew not installed. Existing.${NONE}"
+  echo -e "${RED}     ERROR: Homebrew not installed. Exiting.${NONE}"
   else
     install
     fi

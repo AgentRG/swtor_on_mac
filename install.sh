@@ -138,10 +138,10 @@ tools_installed="/Library/Developer/CommandLineTools"
 # If either isn't installed, the script will quit
 if [ "$tools_version" = "$tools_installed" ]; then
         if [[ $(command -v brew) == "" ]]; then
-                echo -e "${RED}     ERROR: Homebrew not installed. Existing.${NONE}"          
+                echo -e "${RED}     ERROR: Homebrew not installed. Exiting.${NONE}"
         else
                 install
         fi
 else
-        echo -e "${RED}     ERROR: Command Line Tools not installed. Existing.${NONE}"
+        echo -e "${RED}     ERROR: Command Line Tools not installed. Exiting.${NONE}"
 fi
