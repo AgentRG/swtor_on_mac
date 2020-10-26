@@ -115,16 +115,16 @@ install() {
   echo -e "${PURPLE}\tStep 2: Install Homebrew packages${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  install_package_wget &&
-  install_package_cask &&
-  install_package_xquartz &&
-  install_package_wine &&
-  install_package_winetricks &&
+  install_package_wget
+  install_package_cask
+  install_package_xquartz
+  install_package_wine
+  install_package_winetricks
 
   echo -e "${PURPLE}\tStep 3: Create custom Wine prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  create_swtor_prefix &&
+  create_swtor_prefix
 
   echo -e "${PURPLE}\tStep 4: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
@@ -166,7 +166,7 @@ install() {
 }
 
 check_if_not_catalina_or_later () {
-  if [[ $(sw_vers -productVersion) -ge 1015 ]]; then
+  if [[ $(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g" | sed -e 's/\.//g') -ge 1015 ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS Catalina or later installed. Existing"
     exit
   else
