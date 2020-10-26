@@ -170,7 +170,7 @@ echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
 
 tools_version=$(xcode-select -p)
 tools_installed="/Library/Developer/CommandLineTools"
-xcode_check='mdfind -name "kMDItemFSName=="Xcode.app""'
+xcode_check=$(mdfind -name 'kMDItemFSName=="Xcode.app"')
 xcode_installed="/Applications/Xcode.app"
 
 # Check if Command Line Tools are installed followed by if Homebrew is installed
