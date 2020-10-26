@@ -168,9 +168,6 @@ install() {
 check_if_not_catalina_or_later () {
   if [[ $(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g" | sed -e 's/\.//g') -ge 1015 ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Existing"
-    exit
-  else
-    return
   fi
 }
 
@@ -186,19 +183,12 @@ xcode_installed="Contents"
 
 # Check if Command Line Tools are installed followed by if Homebrew is installed
 # If either isn't installed, the script will quit
-if [ "$tools_version" = "$tools_installed" ]; then
+if [ "$tools_version" = "$tools_installed" ] || [ "$xcode_check" = "$xcode_installed" ]; then
   if [[ $(command -v brew) == "" ]]; then
     echo -e "${RED}\tERROR: Homebrew not installed. Exiting.${NONE}"
   else
     install
   fi
 else
-  if [ "$xcode_check" = "$xcode_installed" ]; then
-    if [[ $(command -v brew) == "" ]]; then
-      echo -e "${RED}\tERROR: Homebrew not installed. Exiting.${NONE}"
-    else
-      install
-    fi
-      echo -e "${RED}\tERROR: Command Line Tools not installed. Exiting.${NONE}"
-  fi
+  echo -e "${RED}\tERROR: Command Line Tools not installed. Exiting.${NONE}"
 fi
