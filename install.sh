@@ -5,7 +5,7 @@ PURPLE='\033[01;35m'
 RED='\033[0;31m'
 
 create_temporary_downloads_folder() {
-  echo -e "${PURPLE}\t(1/1) Creating temporary downloads folder${NONE}"
+  echo -e "${PURPLE}\t(1/1) Creating temporary downloads folder\n${NONE}"
   mkdir ~/swtor_tmp
 }
 
@@ -30,12 +30,12 @@ install_package_wine() {
 }
 
 install_package_winetricks() {
-  echo -e "${PURPLE}\t(5/5) Installing Winetricks${NONE}"
+  echo -e "${PURPLE}\t(5/5) Installing Winetricks\n${NONE}"
   brew install winetricks
 }
 
 create_swtor_prefix() {
-  echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix${NONE}"
+  echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix\n${NONE}"
   WINEARCH=win64 WINEPREFIX=~/"SWTOR On Mac" wine wineboot >/dev/null 2>&1
 }
 
@@ -50,7 +50,7 @@ install_dll_crypt32() {
 }
 
 install_dll_d3dx9_36() {
-  echo -e "${PURPLE}\t(3/3) Installing d3dx9_36${NONE}"
+  echo -e "${PURPLE}\t(3/3) Installing d3dx9_36\n${NONE}"
   env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q d3dx9_36 >/dev/null 2>&1
 }
 
@@ -60,7 +60,7 @@ set_vram() {
 }
 
 switch_windows_version() {
-  echo -e "${PURPLE}\t(2/2) Switching Windows version to Windows 10${NONE}"
+  echo -e "${PURPLE}\t(2/2) Switching Windows version to Windows 10\n${NONE}"
   env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q win10 >/dev/null 2>&1
 }
 
@@ -75,7 +75,7 @@ download_swtor() {
 }
 
 download_swtor_icon() {
-  echo -e "${PURPLE}\t(3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac"
+  echo -e "${PURPLE}\t(3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac\n"
   wget -q -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
 }
 
@@ -90,12 +90,12 @@ move_swtor_setup() {
 }
 
 move_swtor_icon() {
-  echo -e "${PURPLE}\t(3/3) Moving swtor_icon.icns to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(3/3) Moving swtor_icon.icns to prefix folder\n${NONE}"
   mv ~/swtor_tmp/swtor_icon.icns ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
 delete_temporary_downloads_folder () {
-  echo -e "${PURPLE}\t(1/1) Deleting temporary downloads folder ${NONE}"
+  echo -e "${PURPLE}\t(1/1) Deleting temporary downloads folder\n${NONE}"
   rm -r ~/swtor_tmp/
 }
 
@@ -187,6 +187,6 @@ else
     else
       install
     fi
+      echo -e "${RED}\tERROR: Command Line Tools not installed. Exiting.${NONE}"
   fi
-  echo -e "${RED}\tERROR: Command Line Tools not installed. Exiting.${NONE}"
 fi
