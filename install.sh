@@ -115,16 +115,16 @@ install() {
   echo -e "${PURPLE}\tStep 2: Install Homebrew packages${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  install_package_wget
-  install_package_cask
-  install_package_xquartz
-  install_package_wine
-  install_package_winetricks
+  install_package_wget &&
+  install_package_cask &&
+  install_package_xquartz &&
+  install_package_wine &&
+  install_package_winetricks &&
 
   echo -e "${PURPLE}\tStep 3: Create custom Wine prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  create_swtor_prefix
+  create_swtor_prefix &&
 
   echo -e "${PURPLE}\tStep 4: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
