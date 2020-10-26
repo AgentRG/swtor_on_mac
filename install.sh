@@ -166,7 +166,7 @@ install() {
 }
 
 check_if_not_catalina_or_later () {
-  if [[ $(sw_vers -productVersion) -ge 10.15 ]]; then
+  if [[ $(sw_vers -productVersion) -ge 1015 ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS Catalina or later installed. Existing"
     exit
   else
