@@ -108,7 +108,7 @@ launch_swtor () {
 install() {
 
   echo -e "${PURPLE}\tStep 1: Create temporary downloads folder${NONE}"
-  echo -e "${PURPLE}     ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+  echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   create_temporary_downloads_folder
 
@@ -165,7 +165,6 @@ install() {
   launch_swtor
 }
 
-echo
 echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
 
 tools_version=$(xcode-select -p)
