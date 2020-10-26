@@ -165,7 +165,19 @@ install() {
   launch_swtor
 }
 
+check_if_not_catalina_or_later () {
+  if [[ $(sw_vers -productVersion) -ge 10.15 ]]; then
+    echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS Catalina or later installed. Existing"
+    exit
+  else
+    return
+  fi
+}
+
+
 echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
+
+check_if_not_catalina_or_later
 
 tools_version=$(xcode-select -p)
 tools_installed="/Library/Developer/CommandLineTools"
