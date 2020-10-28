@@ -66,12 +66,12 @@ switch_windows_version() {
 
 download_swtor_fix() {
   echo -e "${PURPLE}\t(1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
-  wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe -q
+  wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe
 }
 
 download_swtor() {
   echo -e "${PURPLE}\t(2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
-  wget -q -O SWTOR_setup.exe http://www.swtor.com/download -q
+  wget -q -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
 download_swtor_icon() {
