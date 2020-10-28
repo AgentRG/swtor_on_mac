@@ -36,42 +36,42 @@ install_package_winetricks() {
 
 create_swtor_prefix() {
   echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix\n${NONE}"
-  WINEARCH=win64 WINEPREFIX=~/"SWTOR On Mac" wine wineboot >/dev/null 2>&1
+  WINEARCH=win64 WINEPREFIX=~/"SWTOR On Mac" wine wineboot
 }
 
 install_dll_vcrun2008() {
   echo -e "${PURPLE}\t(1/3) Installing vcrun2008${NONE}"
-  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q vcrun2008 >/dev/null 2>&1
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q vcrun2008
 }
 
 install_dll_crypt32() {
   echo -e "${PURPLE}\t(2/3) Installing crypt32${NONE}"
-  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q crypt32 >/dev/null 2>&1
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q crypt32
 }
 
 install_dll_d3dx9_36() {
   echo -e "${PURPLE}\t(3/3) Installing d3dx9_36\n${NONE}"
-  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q d3dx9_36 >/dev/null 2>&1
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q d3dx9_36
 }
 
 set_vram() {
   echo -e "${PURPLE}\t(1/2) Setting prefix VRAM to 512${NONE}"
-  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q videomemorysize=512 >/dev/null 2>&1
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q videomemorysize=512
 }
 
 switch_windows_version() {
   echo -e "${PURPLE}\t(2/2) Switching Windows version to Windows 10\n${NONE}"
-  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q win10 >/dev/null 2>&1
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q win10
 }
 
 download_swtor_fix() {
   echo -e "${PURPLE}\t(1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
-  wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe -q
+  wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe
 }
 
 download_swtor() {
   echo -e "${PURPLE}\t(2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
-  wget -q -O SWTOR_setup.exe http://www.swtor.com/download -q
+  wget -q -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
 download_swtor_icon() {
