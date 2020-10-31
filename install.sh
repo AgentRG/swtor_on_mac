@@ -168,6 +168,7 @@ install() {
 check_if_not_catalina_or_later () {
   if [[ $(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g" | sed -e 's/\.//g') -ge 1015 ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Existing"
+    exit
   fi
 }
 
