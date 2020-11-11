@@ -71,12 +71,12 @@ download_swtor_fix() {
 
 download_swtor() {
   echo -e "${PURPLE}\t(2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
-  wget -q -O SWTOR_setup.exe http://www.swtor.com/download
+  wget -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
 download_swtor_icon() {
   echo -e "${PURPLE}\t(3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac\n"
-  wget -q -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
+  wget -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
 }
 
 move_swtor_fix() {
