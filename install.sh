@@ -105,18 +105,13 @@ delete_temporary_downloads_folder () {
 }
 
 unzip_swtor_app() {
-  echo -e "${PURPLE}\t(1/3) Unzip SWTOR.zip\n${NONE}"
+  echo -e "${PURPLE}\t(1/2) Unzip SWTOR.zip\n${NONE}"
   unzip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
 }
 
 move_swtor_app_to_desktop() {
-  echo -e "${PURPLE}\t(2/3) Move SWTOR.app to Desktop\n${NONE}"
-  mv ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.app ~/Desktop/
-}
-
-delete_swtor_zip() {
-  echo -e "${PURPLE}\t(3/3) Delete SWTOR.zip\n${NONE}"
-  rm -r ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
+  echo -e "${PURPLE}\t(2/2) Move SWTOR.app to Desktop\n${NONE}"
+  mv ~/SWTOR.app ~/Desktop/
 }
 
 launch_swtor () {
@@ -186,7 +181,6 @@ install() {
 
   unzip_swtor_app
   move_swtor_app_to_desktop
-  delete_swtor_zip
 
   echo -e "${PURPLE}\tSWTOR On Mac Installation Finished Successfully!${NONE}"
 
