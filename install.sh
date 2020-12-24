@@ -10,27 +10,22 @@ create_temporary_downloads_folder() {
 }
 
 install_package_wget() {
-  echo -e "${PURPLE}\t(1/5) Installing wget${NONE}"
+  echo -e "${PURPLE}\t(1/4) Installing wget${NONE}"
   brew install wget
 }
 
-install_package_cask() {
-  echo -e "${PURPLE}\t(2/5) Installing cask${NONE}"
-  brew install cask
-}
-
 install_package_xquartz() {
-  echo -e "${PURPLE}\t(3/5) Installing XQuartz (Might take a while)${NONE}"
-  brew cask install xquartz
+  echo -e "${PURPLE}\t(2/4) Installing XQuartz (Might take a while)${NONE}"
+  brew install --cask xquartz
 }
 
 install_package_wine() {
-  echo -e "${PURPLE}\t(4/5) Installing Wine${NONE}"
-  brew cask install --no-quarantine wine-stable
+  echo -e "${PURPLE}\t(3/4) Installing Wine${NONE}"
+  brew install --cask --no-quarantine wine-stable
 }
 
 install_package_winetricks() {
-  echo -e "${PURPLE}\t(5/5) Installing Winetricks\n${NONE}"
+  echo -e "${PURPLE}\t(4/4) Installing Winetricks\n${NONE}"
   brew install winetricks
 }
 
@@ -116,7 +111,6 @@ install() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   install_package_wget
-  install_package_cask
   install_package_xquartz
   install_package_wine
   install_package_winetricks
