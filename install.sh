@@ -106,8 +106,7 @@ delete_temporary_downloads_folder () {
 
 unzip_swtor_app() {
   echo -e "${PURPLE}\t(1/3) Unzip SWTOR.zip\n${NONE}"
-  cd ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/ || exit
-  unzip SWTOR.zip
+  unzip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
 }
 
 move_swtor_app_to_desktop() {
