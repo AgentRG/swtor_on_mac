@@ -60,38 +60,64 @@ switch_windows_version() {
 }
 
 download_swtor_fix() {
-  echo -e "${PURPLE}\t(1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
+  echo -e "${PURPLE}\t(1/4) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
   wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe
 }
 
 download_swtor() {
-  echo -e "${PURPLE}\t(2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
+  echo -e "${PURPLE}\t(2/4) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
   wget -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
+download_swtor_zip() {
+  echo -e "${PURPLE}\t(3/4) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
+  wget swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/AgentRG-patch-13/SWTOR.zip?raw=true
+}
+
 download_swtor_icon() {
-  echo -e "${PURPLE}\t(3/3) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac\n"
+  echo -e "${PURPLE}\t(4/4) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac\n"
   wget -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
 }
 
 move_swtor_fix() {
-  echo -e "${PURPLE}\t(1/3) Moving swtor_fix.exe to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(1/4) Moving swtor_fix.exe to prefix folder${NONE}"
   mv ~/swtor_tmp/swtor_fix.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
 move_swtor_setup() {
-  echo -e "${PURPLE}\t(2/3) Moving SWTOR_setup.exe to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(2/4) Moving SWTOR_setup.exe to prefix folder${NONE}"
   mv ~/swtor_tmp/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
+move_swtor_zip() {
+  echo -e "${PURPLE}\t(3/4) Moving SWTOR.zip to prefix folder\n${NONE}"
+  mv ~/swtor_tmp/SWTOR.zip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+}
+
 move_swtor_icon() {
-  echo -e "${PURPLE}\t(3/3) Moving swtor_icon.icns to prefix folder\n${NONE}"
+  echo -e "${PURPLE}\t(4/4) Moving swtor_icon.icns to prefix folder\n${NONE}"
   mv ~/swtor_tmp/swtor_icon.icns ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
 delete_temporary_downloads_folder () {
   echo -e "${PURPLE}\t(1/1) Deleting temporary downloads folder\n${NONE}"
   rm -r ~/swtor_tmp/
+}
+
+unzip_swtor_app() {
+  echo -e "${PURPLE}\t(1/3) Unzip SWTOR.zip\n${NONE}"
+  cd ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/ || exit
+  unzip SWTOR.zip
+}
+
+move_swtor_app_to_desktop() {
+  echo -e "${PURPLE}\t(2/3) Move SWTOR.app to Desktop\n${NONE}"
+  mv ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.app ~/Desktop/
+}
+
+delete_swtor_zip() {
+  echo -e "${PURPLE}\t(3/3) Delete SWTOR.zip\n${NONE}"
+  rm -r ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
 }
 
 launch_swtor () {
@@ -139,6 +165,7 @@ install() {
   cd ~/swtor_tmp/ || exit
   download_swtor_fix
   download_swtor
+  download_swtor_zip
   download_swtor_icon
   cd ~/ || exit
 
@@ -147,12 +174,20 @@ install() {
 
   move_swtor_fix
   move_swtor_setup
+  move_swtor_zip
   move_swtor_icon
 
   echo -e "${PURPLE}\tStep 8: Delete temporary downloads folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   delete_temporary_downloads_folder
+
+  echo -e "${PURPLE}\tStep 9: Unzip SWTOR.zip and move application to Desktop${NONE}"
+  echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+
+  unzip_swtor_app
+  move_swtor_app_to_desktop
+  delete_swtor_zip
 
   echo -e "${PURPLE}\tSWTOR On Mac Installation Finished Successfully!${NONE}"
 
