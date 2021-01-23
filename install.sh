@@ -66,21 +66,41 @@ switch_windows_version() {
 }
 
 download_swtor() {
-  echo -e "${PURPLE}\t(2/4) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
+  echo -e "${PURPLE}\t(1/2) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
   wget -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
+download_swtor_shortcut_zip() {
+  echo -e "${PURPLE}\t(2/2) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
+  wget https://github.com/AgentRG/swtor_on_mac/raw/AgentRG-patch-14/SWTOR.zip
+}
+
 move_swtor_setup() {
-  echo -e "${PURPLE}\t(2/4) Moving SWTOR_setup.exe to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(1/2) Moving SWTOR_setup.exe to prefix folder${NONE}"
   mv ~/swtor_tmp/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
-delete_temporary_downloads_folder () {
+move_swtor_shortcut_zip() {
+  echo -e "${PURPLE}\t(2/2) Moving SWTOR.zip to prefix folder\n${NONE}"
+  mv ~/swtor_tmp/SWTOR.zip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+}
+
+delete_temporary_downloads_folder() {
   echo -e "${PURPLE}\t(1/1) Deleting temporary downloads folder\n${NONE}"
   rm -r ~/swtor_tmp/
 }
 
-launch_swtor () {
+unzip_swtor_app() {
+  echo -e "${PURPLE}\t(1/2) Unzip SWTOR.zip\n${NONE}"
+  unzip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
+}
+
+move_swtor_app_to_desktop() {
+  echo -e "${PURPLE}\t(2/2) Move SWTOR.app to Desktop\n${NONE}"
+  mv ~/SWTOR.app ~/Desktop/
+}
+
+launch_swtor() {
   echo -e "${PURPLE}\tLaunching SWTOR_setup.exe...${NONE}"
   WINEPREFIX=~/"SWTOR On Mac" wine ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR_setup.exe >/dev/null 2>&1
 }
@@ -124,34 +144,41 @@ install() {
 
   cd ~/swtor_tmp/ || exit
   download_swtor
+  download_swtor_shortcut_zip
   cd ~/ || exit
 
   echo -e "${PURPLE}\tStep 7: Move executables and icon and move to prefix folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   move_swtor_setup
+  move_swtor_shortcut_zip
 
   echo -e "${PURPLE}\tStep 8: Delete temporary downloads folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   delete_temporary_downloads_folder
 
+  echo -e "${PURPLE}\tStep 9: Unzip SWTOR.zip and move application to Desktop${NONE}"
+  echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+
+  unzip_swtor_app
+  move_swtor_app_to_desktop
+
   echo -e "${PURPLE}\tSWTOR On Mac Installation Finished Successfully!${NONE}"
 
   launch_swtor
 }
 
-check_if_not_catalina_or_later () {
-  if [[ $(echo "${CURRENT_VERSION}"|cut -d"." -f1) -ge $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}"|cut -d"." -f1) ]]; then
+check_if_not_catalina_or_later() {
+  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -ge $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
-  if [[ $(echo "${CURRENT_VERSION}"|cut -d"." -f2) -le $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}"|cut -d"." -f2) ]]; then
+  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -le $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
 }
-
 
 echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
 
