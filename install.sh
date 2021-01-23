@@ -4,6 +4,7 @@ NONE='\033[00m'
 PURPLE='\033[01;35m'
 RED='\033[0;31m'
 LAST_POSSIBLE_OS_TO_RUN_IN=10.14
+BIG_SUR_OS=11
 CURRENT_VERSION=$(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g")
 TOOLS_VERSION=$(xcode-select -p)
 TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
@@ -170,11 +171,10 @@ install() {
 }
 
 check_if_not_catalina_or_later() {
-  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
+  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -ge $BIG_SUR_OS ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
-  echo "im here"
   if [[ $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) -le $(echo "${CURRENT_VERSION}" | cut -d"." -f2) ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
