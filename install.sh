@@ -174,7 +174,8 @@ check_if_not_catalina_or_later() {
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
-  if [[ $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) -ge $(echo "${CURRENT_VERSION}" | cut -d"." -f2) ]]; then
+  echo "im here"
+  if [[ $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) -le $(echo "${CURRENT_VERSION}" | cut -d"." -f2) ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
