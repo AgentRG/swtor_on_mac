@@ -1,8 +1,0 @@
-#!/bin/bash
-
-export PATH="/usr/local/bin:$PATH"
-prefix_location=$(dirname "$(find ~/ -path \*drive_c/Program\ Files\ \(x86\)/swtor_fix.exe -print -quit 2>/dev/null| tail -1 | grep -o '.*/drive_c')")
-path_to_swtor_fix="/drive_c/Program Files (x86)/swtor_fix.exe"
-path_to_swtor_launcher="/drive_c/Program Files (x86)/Electronic Arts/BioWare/Star Wars - The Old Republic/launcher.exe"
-WINEPREFIX=$prefix_location wine "$prefix_location$path_to_swtor_fix" &
-WINEPREFIX=$prefix_location wine "$prefix_location$path_to_swtor_launcher"
