@@ -170,7 +170,7 @@ install() {
 }
 
 check_if_not_catalina_or_later() {
-  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -ge $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
+  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
     echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
