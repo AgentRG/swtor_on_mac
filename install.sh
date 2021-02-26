@@ -3,6 +3,12 @@
 NONE='\033[00m'
 PURPLE='\033[01;35m'
 RED='\033[0;31m'
+LAST_POSSIBLE_OS_TO_RUN_IN=10.14
+CURRENT_VERSION=$(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g")
+TOOLS_VERSION=$(xcode-select -p)
+TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
+XCODE_CHECK=$(ls /Applications/Xcode.app)
+XCODE_INSTALLED="Contents"
 
 create_temporary_downloads_folder() {
   echo -e "${PURPLE}\t(1/1) Creating temporary downloads folder\n${NONE}"
@@ -50,8 +56,8 @@ install_dll_d3dx9_36() {
 }
 
 set_vram() {
-  echo -e "${PURPLE}\t(1/2) Setting prefix VRAM to 512${NONE}"
-  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q videomemorysize=512
+  echo -e "${PURPLE}\t(1/2) Setting prefix VRAM to 1024${NONE}"
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q videomemorysize=1024
 }
 
 switch_windows_version() {
@@ -60,46 +66,36 @@ switch_windows_version() {
 }
 
 download_swtor_fix() {
-  echo -e "${PURPLE}\t(1/4) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
+  echo -e "${PURPLE}\t(1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
   wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe
 }
 
 download_swtor() {
-  echo -e "${PURPLE}\t(2/4) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
+  echo -e "${PURPLE}\t(2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
   wget -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
-download_swtor_zip() {
-  echo -e "${PURPLE}\t(3/4) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
-  wget https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
-}
-
-download_swtor_icon() {
-  echo -e "${PURPLE}\t(4/4) Downloading swtor_logo.icns from https://github.com/AgentRG/swtor_on_mac\n"
-  wget -O swtor_icon.icns https://github.com/AgentRG/swtor_on_mac/blob/master/swtor_logo.icns?raw=true
+download_swtor_shortcut_zip() {
+  echo -e "${PURPLE}\t(3/3) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
+  wget https://github.com/AgentRG/swtor_on_mac/raw/AgentRG-patch-14/SWTOR.app
 }
 
 move_swtor_fix() {
-  echo -e "${PURPLE}\t(1/4) Moving swtor_fix.exe to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(1/3) Moving swtor_fix.exe to prefix folder${NONE}"
   mv ~/swtor_tmp/swtor_fix.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
 move_swtor_setup() {
-  echo -e "${PURPLE}\t(2/4) Moving SWTOR_setup.exe to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(2/3) Moving SWTOR_setup.exe to prefix folder${NONE}"
   mv ~/swtor_tmp/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
-move_swtor_zip() {
-  echo -e "${PURPLE}\t(3/4) Moving SWTOR.zip to prefix folder\n${NONE}"
+move_swtor_shortcut_zip() {
+  echo -e "${PURPLE}\t(3/3) Moving SWTOR.zip to prefix folder\n${NONE}"
   mv ~/swtor_tmp/SWTOR.zip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
-move_swtor_icon() {
-  echo -e "${PURPLE}\t(4/4) Moving swtor_icon.icns to prefix folder\n${NONE}"
-  mv ~/swtor_tmp/swtor_icon.icns ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
-}
-
-delete_temporary_downloads_folder () {
+delete_temporary_downloads_folder() {
   echo -e "${PURPLE}\t(1/1) Deleting temporary downloads folder\n${NONE}"
   rm -r ~/swtor_tmp/
 }
@@ -114,7 +110,7 @@ move_swtor_app_to_desktop() {
   mv ~/SWTOR.app ~/Desktop/
 }
 
-launch_swtor () {
+launch_swtor() {
   echo -e "${PURPLE}\tLaunching SWTOR_setup.exe...${NONE}"
   WINEPREFIX=~/"SWTOR On Mac" wine ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR_setup.exe >/dev/null 2>&1
 }
@@ -153,14 +149,13 @@ install() {
   set_vram
   switch_windows_version
 
-  echo -e "${PURPLE}\tStep 6: Download executables and icon${NONE}"
+  echo -e "${PURPLE}\tStep 6: Download SWTOR executable${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   cd ~/swtor_tmp/ || exit
   download_swtor_fix
   download_swtor
-  download_swtor_zip
-  download_swtor_icon
+  download_swtor_shortcut_zip
   cd ~/ || exit
 
   echo -e "${PURPLE}\tStep 7: Move executables and icon and move to prefix folder${NONE}"
@@ -168,8 +163,7 @@ install() {
 
   move_swtor_fix
   move_swtor_setup
-  move_swtor_zip
-  move_swtor_icon
+  move_swtor_shortcut_zip
 
   echo -e "${PURPLE}\tStep 8: Delete temporary downloads folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
@@ -187,26 +181,24 @@ install() {
   launch_swtor
 }
 
-check_if_not_catalina_or_later () {
-  if [[ $(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g" | sed -e 's/\.//g') -ge 1015 ]]; then
-    echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting"
+check_if_not_catalina_or_later() {
+  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
+    echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
+    exit
+  fi
+  if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
+    echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
     exit
   fi
 }
-
 
 echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
 
 check_if_not_catalina_or_later
 
-tools_version=$(xcode-select -p)
-tools_installed="/Library/Developer/CommandLineTools"
-xcode_check=$(ls /Applications/Xcode.app)
-xcode_installed="Contents"
-
 # Check if Command Line Tools are installed followed by if Homebrew is installed
 # If either isn't installed, the script will quit
-if [ "$tools_version" = "$tools_installed" ] || [ "$xcode_check" = "$xcode_installed" ]; then
+if [ "$TOOLS_VERSION" = "$TOOLS_INSTALLED" ] || [ "$XCODE_CHECK" = "$XCODE_INSTALLED" ]; then
   if [[ $(command -v brew) == "" ]]; then
     echo -e "${RED}\tERROR: Homebrew not installed. Exiting.${NONE}"
   else
