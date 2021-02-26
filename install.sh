@@ -153,9 +153,9 @@ install() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   cd ~/swtor_tmp/ || exit
+  download_swtor_shortcut_zip
   download_swtor_fix
   download_swtor
-  download_swtor_shortcut_zip
   cd ~/ || exit
 
   echo -e "${PURPLE}\tStep 7: Move executables and icon and move to prefix folder${NONE}"
