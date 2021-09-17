@@ -77,7 +77,7 @@ download_swtor() {
 
 download_swtor_shortcut_zip() {
   echo -e "${PURPLE}\t(3/3) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
-  wget https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.app
+  wget https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 }
 
 move_swtor_fix() {
