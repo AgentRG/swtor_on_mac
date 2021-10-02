@@ -21,7 +21,7 @@ install_package_wget() {
 }
 
 install_package_xquartz() {
-  echo -e "${PURPLE}\t(2/4) Installing XQuartz (Might take a while)${NONE}"
+  echo -e "${PURPLE}\t(2/4) Installing XQuartz (Might take a while and ask for password)${NONE}"
   brew install --cask xquartz
 }
 
