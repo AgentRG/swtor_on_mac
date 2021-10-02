@@ -27,7 +27,7 @@ install_package_xquartz() {
 
 install_package_wine() {
   echo -e "${PURPLE}\t(3/4) Installing Wine${NONE}"
-  brew install --cask --no-quarantine wine-stable
+  brew install --cask --no-quarantine -allowUntrusted wine-stable
 }
 
 install_package_winetricks() {
