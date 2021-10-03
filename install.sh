@@ -38,7 +38,7 @@ install_package_winetricks() {
 
 create_swtor_prefix() {
   echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix\n${NONE}"
-  WINEARCH=win32 WINEPREFIX=~/"SWTOR On Mac" wine wineboot
+  WINEARCH=win64 WINEPREFIX=~/"SWTOR On Mac" wine wineboot
 }
 
 install_dll_vcrun2008() {
