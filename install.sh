@@ -3,6 +3,7 @@
 NONE='\033[00m'
 PURPLE='\033[01;35m'
 RED='\033[0;31m'
+EARLIEST_POSSIBLE_OS_TO_RUN_IN=10.13
 LAST_POSSIBLE_OS_TO_RUN_IN=10.14
 CURRENT_VERSION=$(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g")
 TOOLS_VERSION=$(xcode-select -p)
@@ -20,14 +21,14 @@ install_package_wget() {
   brew install wget
 }
 
-install_package_xquartz() {
-  echo -e "${PURPLE}\t(2/4) Installing XQuartz (Might take a while and ask for password)${NONE}"
-  brew install --cask xquartz
+tap_into_gcenx() {
+  echo -e "${PURPLE}\t(2/4) Tapping into Gcenx custom Wine Builds (https://github.com/Gcenx/macOS_Wine_builds)"
+  brew tap gcenx/wine
 }
 
-install_package_wine() {
-  echo -e "${PURPLE}\t(3/4) Installing Wine${NONE}"
-  brew install --cask --no-quarantine wine-stable
+install_package_gcenx_wine() {
+  echo -e "${PURPLE}\t(3/4) Installing Gcenx custom Wine${NONE}"
+  brew install --cask --no-quarantine gcenx-wine-stable
 }
 
 install_package_winetricks() {
@@ -127,8 +128,8 @@ install() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   install_package_wget
-  install_package_xquartz
-  install_package_wine
+  tap_into_gcenx
+  install_package_gcenx_wine
   install_package_winetricks
 
   echo -e "${PURPLE}\tStep 3: Create custom Wine prefix${NONE}"
@@ -183,17 +184,29 @@ install() {
 
 check_if_not_catalina_or_later() {
   if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
-    echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
+    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra or Mojave. Exiting${NONE}"
     exit
   fi
   if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
-    echo -e "${RED}\tERROR: SWTOR will not work on machines with macOS 10.15 or later. Exiting${NONE}"
+    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra or Mojave. Exiting${NONE}"
     exit
   fi
 }
 
+check_if_not_high_sierra_or_earlier() {
+    if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
+      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra or Mojave. Exiting${NONE}"
+      exit
+    fi
+    if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
+      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra or Mojave. Exiting${NONE}"
+      exit
+    fi
+}
+
 echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
 
+check_if_not_high_sierra_or_earlier
 check_if_not_catalina_or_later
 
 # Check if Command Line Tools are installed followed by if Homebrew is installed
