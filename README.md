@@ -14,5 +14,4 @@ SWTOR On Mac can be uninstalled by simply moving the prefix folder to Trash.
 
 If you also want to uninstall Homebrew and all the dependencies installed by it, run the following commands independently:
 1. ```brew list | xargs brew uninstall --force```
-2. ```brew list --cask | xargs brew uninstall --force```
-3. ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"```
+2. ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"```
