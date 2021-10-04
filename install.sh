@@ -26,7 +26,7 @@ tap_into_agentrg() {
   brew tap agentrg/wine
 }
 
-install_package_AgentRG_wine() {
+install_package_agentrg_wine() {
   echo -e "${PURPLE}\t(3/4) Installing TEST Gcenx custom Wine${NONE}"
   brew install --cask --no-quarantine agentrg-wine-staging
 }
@@ -128,8 +128,8 @@ install() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   install_package_wget
-  tap_into_gcenx
-  install_package_gcenx_wine
+  tap_into_agentrg
+  install_package_agentrg_wine
   install_package_winetricks
 
   echo -e "${PURPLE}\tStep 3: Create custom Wine prefix${NONE}"
