@@ -21,14 +21,14 @@ install_package_wget() {
   brew install wget
 }
 
-tap_into_gcenx() {
-  echo -e "${PURPLE}\t(2/4) Tapping into Gcenx custom Wine Builds (https://github.com/Gcenx/macOS_Wine_builds)"
-  brew tap gcenx/wine
+tap_into_agentrg() {
+  echo -e "${PURPLE}\t(2/4) Tapping into AgentRG custom Wine Builds (https://github.com/AgentRG/homebrew-wine)"
+  brew tap agentrg/wine
 }
 
-install_package_gcenx_wine() {
+install_package_AgentRG_wine() {
   echo -e "${PURPLE}\t(3/4) Installing TEST Gcenx custom Wine${NONE}"
-  brew install --cask --no-quarantine gcenx-wine-staging
+  brew install --cask --no-quarantine agentrg-wine-staging
 }
 
 install_package_winetricks() {
