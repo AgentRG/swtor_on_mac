@@ -57,42 +57,37 @@ install_dll_d3dx9_36() {
 }
 
 set_vram() {
-  echo -e "${PURPLE}\t(1/2) Setting prefix VRAM to 1024${NONE}"
+  echo -e "${PURPLE}\t(1/3) Setting prefix VRAM to 1024${NONE}"
   env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q videomemorysize=1024
 }
 
 switch_windows_version() {
-  echo -e "${PURPLE}\t(2/2) Switching Windows version to Windows 10\n${NONE}"
+  echo -e "${PURPLE}\t(2/3) Switching Windows version to Windows 10${NONE}"
   env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q win10
 }
 
-download_swtor_fix() {
-  echo -e "${PURPLE}\t(1/3) Downloading swtor_fix.exe from https://github.com/AgentRG/swtor_fix/${NONE}"
-  wget https://github.com/AgentRG/swtor_fix/raw/master/swtor_fix.exe
+switch_all_dlls_to_builtin() {
+  ehco -e "${PURPLE}\t(1/3) Change all prefix DLLs to be builtin\n${NONE}"
+  env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q alldlls=builtin
 }
 
 download_swtor() {
-  echo -e "${PURPLE}\t(2/3) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
+  echo -e "${PURPLE}\t(1/2) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
   wget -O SWTOR_setup.exe http://www.swtor.com/download
 }
 
 download_swtor_shortcut_zip() {
-  echo -e "${PURPLE}\t(3/3) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
+  echo -e "${PURPLE}\t(2/2) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
   wget https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 }
 
-move_swtor_fix() {
-  echo -e "${PURPLE}\t(1/3) Moving swtor_fix.exe to prefix folder${NONE}"
-  mv ~/swtor_tmp/swtor_fix.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
-}
-
 move_swtor_setup() {
-  echo -e "${PURPLE}\t(2/3) Moving SWTOR_setup.exe to prefix folder${NONE}"
+  echo -e "${PURPLE}\t(1/2) Moving SWTOR_setup.exe to prefix folder${NONE}"
   mv ~/swtor_tmp/SWTOR_setup.exe ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
 move_swtor_shortcut_zip() {
-  echo -e "${PURPLE}\t(3/3) Moving SWTOR.zip to prefix folder\n${NONE}"
+  echo -e "${PURPLE}\t(2/2) Moving SWTOR.zip to prefix folder\n${NONE}"
   mv ~/swtor_tmp/SWTOR.zip ~/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
 }
 
@@ -149,12 +144,12 @@ install() {
 
   set_vram
   switch_windows_version
+  switch_all_dlls_to_builtin
 
   echo -e "${PURPLE}\tStep 6: Download SWTOR executable${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   cd ~/swtor_tmp/ || exit
-  download_swtor_fix
   download_swtor
   download_swtor_shortcut_zip
   cd ~/ || exit
@@ -162,7 +157,6 @@ install() {
   echo -e "${PURPLE}\tStep 7: Move executables and icon and move to prefix folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
-  move_swtor_fix
   move_swtor_setup
   move_swtor_shortcut_zip
 
