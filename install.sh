@@ -27,8 +27,8 @@ tap_into_gcenx() {
 }
 
 install_package_gcenx_wine() {
-  echo -e "${PURPLE}\t(3/4) Installing Gcenx custom Wine${NONE}"
-  brew install --cask --no-quarantine gcenx-wine-stable
+  echo -e "${PURPLE}\t(3/4) Installing TEST Gcenx custom Wine${NONE}"
+  brew install --cask --no-quarantine gcenx-wine-staging
 }
 
 install_package_winetricks() {
