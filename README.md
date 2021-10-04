@@ -1,4 +1,4 @@
-# SWTOR On Mac
+# SWTOR On Mac [![Github All Releases](https://img.shields.io/github/downloads/agentrg/swtor_on_mac/total.svg)]()
 Script written for macOS using Homebrew / Winetricks to install everything required for Star Wars: The Old Republic up to the point where the installer is launched.
 
 ### Install SWTOR On Mac
@@ -16,5 +16,3 @@ If you also want to uninstall Homebrew and all the dependencies installed by it,
 1. ```brew list | xargs brew uninstall --force```
 2. ```brew list --cask | xargs brew uninstall --force```
 3. ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"```
-
-[![Github All Releases](https://img.shields.io/github/downloads/agentrg/swtor_on_mac/total.svg)]()
