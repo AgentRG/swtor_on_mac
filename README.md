@@ -16,3 +16,5 @@ If you also want to uninstall Homebrew and all the dependencies installed by it,
 1. ```brew list | xargs brew uninstall --force```
 2. ```brew list --cask | xargs brew uninstall --force```
 3. ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"```
+
+[![Github All Releases](https://img.shields.io/github/downloads/agentrg/swtor_on_mac/total.svg)]()
