@@ -27,7 +27,7 @@ tap_into_agentrg() {
 }
 
 install_package_agentrg_wine() {
-  echo -e "${PURPLE}\t(3/4) Installing TEST Gcenx custom Wine${NONE}"
+  echo -e "${PURPLE}\t(3/4) Installing Gcenx custom Wine${NONE}"
   brew install --cask --no-quarantine agentrg-wine-staging
 }
 
