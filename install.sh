@@ -67,7 +67,7 @@ switch_windows_version() {
 }
 
 switch_all_dlls_to_builtin() {
-  ehco -e "${PURPLE}\t(1/3) Change all prefix DLLs to be builtin\n${NONE}"
+  echo -e "${PURPLE}\t(1/3) Change all prefix DLLs to be builtin\n${NONE}"
   env WINEPREFIX=~/"SWTOR On Mac" sh winetricks -q alldlls=builtin
 }
 
