@@ -22,12 +22,12 @@ install_package_wget() {
 }
 
 tap_into_agentrg() {
-  echo -e "${PURPLE}\t(2/4) Tapping into AgentRG custom Wine Builds (https://github.com/AgentRG/homebrew-wine)"
+  echo -e "${PURPLE}\t(2/4) Tapping into AgentRG Wine builds (https://github.com/AgentRG/homebrew-wine)"
   brew tap agentrg/wine
 }
 
 install_package_agentrg_wine() {
-  echo -e "${PURPLE}\t(3/4) Installing Gcenx custom Wine${NONE}"
+  echo -e "${PURPLE}\t(3/4) Installing Gcenx custom Wine build${NONE}"
   brew install --cask --no-quarantine agentrg-wine-staging
 }
 
