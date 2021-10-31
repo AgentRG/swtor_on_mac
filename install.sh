@@ -17,22 +17,17 @@ create_temporary_downloads_folder() {
 }
 
 install_package_wget() {
-  echo -e "${PURPLE}\t(1/4) Installing wget${NONE}"
+  echo -e "${PURPLE}\t(1/3) Installing wget${NONE}"
   brew install wget
 }
 
-tap_into_agentrg() {
-  echo -e "${PURPLE}\t(2/4) Tapping into AgentRG Wine builds (https://github.com/AgentRG/homebrew-wine)"
-  brew tap agentrg/wine
-}
-
-install_package_agentrg_wine() {
-  echo -e "${PURPLE}\t(3/4) Installing Gcenx custom Wine build${NONE}"
-  brew install --cask --no-quarantine agentrg-wine-staging
+install_package_wine_stable() {
+  echo -e "${PURPLE}\t(2/3) Installing latest Wine version${NONE}"
+  brew install --cask --no-quarantine wine-stable
 }
 
 install_package_winetricks() {
-  echo -e "${PURPLE}\t(4/4) Installing Winetricks\n${NONE}"
+  echo -e "${PURPLE}\t(3/3) Installing Winetricks\n${NONE}"
   brew install winetricks
 }
 
@@ -78,7 +73,7 @@ download_swtor() {
 
 download_swtor_shortcut_zip() {
   echo -e "${PURPLE}\t(2/2) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
-  wget https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
+  wget https://github.com/AgentRG/swtor_on_mac/raw/AgentRG-patch-17/SWTOR.zip
 }
 
 move_swtor_setup() {
@@ -123,8 +118,7 @@ install() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   install_package_wget
-  tap_into_agentrg
-  install_package_agentrg_wine
+  install_package_wine_stable
   install_package_winetricks
 
   echo -e "${PURPLE}\tStep 3: Create custom Wine prefix${NONE}"
@@ -189,12 +183,12 @@ check_if_not_catalina_or_later() {
 
 check_if_not_high_sierra_or_earlier() {
     if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
-      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra or Mojave. Exiting${NONE}"
-      exit
+      echo -e "${RED}\WARNING: Wine is deprecated for macOS versions earlier than High Sierra (10.13)${NONE}"
+      sleep 1
     fi
     if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
-      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra or Mojave. Exiting${NONE}"
-      exit
+      echo -e "${RED}\tWARNING: Wine is deprecated for macOS versions earlier than High Sierra (10.13)${NONE}"
+      sleep 1
     fi
 }
 
