@@ -183,11 +183,11 @@ check_if_not_catalina_or_later() {
 
 check_if_not_high_sierra_or_earlier() {
     if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
-      echo -e "${RED}\WARNING: Wine is deprecated for macOS versions earlier than High Sierra (10.13). The macOS on this machine is: ${CURRENT_VERSION}. Errors may appear that we will not be able to help with.${NONE}"
+      echo -e "${RED}\WARNING: Wine is deprecated for macOS versions earlier than High Sierra (10.13). The macOS on this machine is: $CURRENT_VERSION. Errors may appear that we will not be able to help with.${NONE}"
       echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
     fi
     if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
-      echo -e "${RED}\tWARNING: Wine is deprecated for macOS versions earlier than High Sierra (10.13). The macOS on this machine is: ${CURRENT_VERSION}. Errors may appear that we will not be able to help with.${NONE}"
+      echo -e "${RED}\tWARNING: Wine is deprecated for macOS versions earlier than High Sierra (10.13). The macOS on this machine is: $CURRENT_VERSION. Errors may appear that we will not be able to help with.${NONE}"
       echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
     fi
 }
