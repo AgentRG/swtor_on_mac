@@ -172,22 +172,22 @@ install() {
 
 check_if_not_catalina_or_later() {
   if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
-    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.3) or Mojave (10.4). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
+    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.13) or Mojave (10.14). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
     exit
   fi
   if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -gt $(echo "${LAST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
-    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.3) or Mojave (10.4). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
+    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.13) or Mojave (10.14). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
     exit
   fi
 }
 
 check_if_not_high_sierra_or_earlier() {
     if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]]; then
-      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.3) or Mojave (10.4). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
+      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.13) or Mojave (10.14). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
       exit
     fi
     if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
-      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.3) or Mojave (10.4). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
+      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.13) or Mojave (10.14). The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
       exit
     fi
 }
