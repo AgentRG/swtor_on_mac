@@ -102,20 +102,24 @@ download_crossover_21_patched() {
 }
 
 unpack_crossover_21_tar() {
-  echo -e "${PURPLE}\t(2/5) Unpacking and deleting tar${NONE}"
+  echo -e "${PURPLE}\t(2/5) Unpacking and deleting src-crossover-wine-clang-0.0.1.tar.bz2${NONE}"
+  sleep 3
   tar -jxvf src-crossover-wine-clang-0.0.1.tar.bz2 && rm -f src-crossover-wine-clang-0.0.1.tar.bz2
   cd ~/swtor_tmp/src-crossover-wine-clang-0.0.1/ || exit
 }
 
 compile_llvm() {
+  echo -e "${PURPLE}\t(3/5) Compile LLVM ${NONE}"
   cd clang/llvm && mkdir build && cd build && cmake ../ && make -j"$CORES_AVAILABLE" && cd bin && export PATH="$(pwd):$PATH" && cd ../../../..
 }
 
 compile_clang() {
+  echo -e "${PURPLE}\t(4/5) Compile Clang${NONE}"
   cd clang/clang && mkdir build && cd build && cmake ../ && make -j"$CORES_AVAILABLE" && cd bin && export PATH="$(pwd):$PATH" && cd ../../../..
 }
 
 compile_wine() {
+  echo -e "${PURPLE}\t(5/5) Compile and install Wine${NONE}"
   wine && export PATH="$(pwd):$PATH" && export MACOSX_DEPLOYMENT_TARGET=10.14 && CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x --disable-tests --disable-mscms && make -j"$CORES_AVAILABLE" && sudo make install-lib
   export WINE=wine32on64
 }
