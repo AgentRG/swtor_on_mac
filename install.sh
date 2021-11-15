@@ -81,7 +81,7 @@ install_package_flex() {
 
 install_package_mingw_w64() {
   echo -e "${PURPLE}\t(8/10) Installing Mingw-w64\n${NONE}"
-  brew install mingw-64
+  brew install mingw-w64
 }
 
 install_package_pkg_config() {
