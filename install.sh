@@ -120,7 +120,7 @@ compile_clang() {
 
 compile_wine() {
   echo -e "${PURPLE}\t(5/5) Compile and install Wine${NONE}"
-  wine && export PATH="$(pwd):$PATH" && export MACOSX_DEPLOYMENT_TARGET=10.14 && CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x --disable-tests --disable-mscms && make -j"$CORES_AVAILABLE" && sudo make install-lib
+  cd wine && export PATH="$(pwd):$PATH" && export MACOSX_DEPLOYMENT_TARGET=10.14 && CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x --disable-tests --disable-mscms && make -j"$CORES_AVAILABLE" && sudo make install-lib
   export WINE=wine32on64
 }
 
