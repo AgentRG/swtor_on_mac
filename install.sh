@@ -364,16 +364,16 @@ install_post_catalina() {
   launch_swtor
 }
 
-check_if_not_high_sierra_or_earlier() {
-    if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]] || [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
-      echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.13) or later. The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
-      exit
-    fi
-}
+#check_if_not_high_sierra_or_earlier() {
+ #   if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f1) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f1) ]] || [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -lt $(echo "${EARLIEST_POSSIBLE_OS_TO_RUN_IN}" | cut -d"." -f2) ]]; then
+  #    echo -e "${RED}\tERROR: SWTOR will only work on machines with macOS High Sierra (10.13) or later. The macOS of this machine is $CURRENT_VERSION. Exiting${NONE}"
+   #   exit
+    #fi
+#}
 
 echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
 
-check_if_not_high_sierra_or_earlier
+#check_if_not_high_sierra_or_earlier
 
 # Check if Command Line Tools are installed followed by if Homebrew is installed
 # If either isn't installed, the script will quit
