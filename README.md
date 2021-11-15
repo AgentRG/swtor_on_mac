@@ -1,4 +1,4 @@
-# SWTOR On Mac
+# SWTOR On Mac [![Github All Releases](https://img.shields.io/github/downloads/agentrg/swtor_on_mac/total.svg)]()
 Script written for macOS using Homebrew / Winetricks to install everything required for Star Wars: The Old Republic up to the point where the installer is launched.
 
 ### Install SWTOR On Mac
@@ -6,7 +6,7 @@ Script written for macOS using Homebrew / Winetricks to install everything requi
 curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/install.sh | bash
 ```
 Prerequisite:
-1. macOS High Sierra or Mojave installed on the machine (anything older is deprecated and anything newer doesn't support 32-bit).
+1. macOS High Sierra or later
 2. Have both [Command Line Tools](https://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/ "How to Install Command Line Tools") and [Homebrew](https://github.com/Homebrew/install "Homebrew GitHub Page") installed.
 
 ### Uninstall SWTOR On Mac
