@@ -91,7 +91,7 @@ install_package_pkg_config() {
 
 install_package_freetype() {
   echo -e "${PURPLE}\t(10/10) Installing FreeType\n${NONE}"
-  brew install pkg-config
+  brew install freetype
 }
 
 # ---
