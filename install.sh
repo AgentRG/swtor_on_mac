@@ -57,55 +57,60 @@ install_package_winetricks() {
 # Post-Catalina Package Management
 
 install_package_wget_catalina() {
-  echo -e "${PURPLE}\t(1/10) Installing wget${NONE}"
+  echo -e "${PURPLE}\t(1/11) Installing wget${NONE}"
   brew install wget
 }
 
 install_package_winetricks_catalina() {
-  echo -e "${PURPLE}\t(2/10) Installing Winetricks\n${NONE}"
+  echo -e "${PURPLE}\t(2/11) Installing Winetricks\n${NONE}"
   brew install winetricks
 }
 
 install_package_cmake() {
-  echo -e "${PURPLE}\t(3/10) Installing CMake\n${NONE}"
+  echo -e "${PURPLE}\t(3/11) Installing CMake\n${NONE}"
   brew install cmake
 }
 
 install_package_gcc() {
-  echo -e "${PURPLE}\t(4/10) Installing GCC\n${NONE}"
+  echo -e "${PURPLE}\t(4/11) Installing GCC\n${NONE}"
   brew install gcc
 }
 
 install_package_bison() {
-  echo -e "${PURPLE}\t(5/10) Installing Bison\n${NONE}"
+  echo -e "${PURPLE}\t(5/11) Installing Bison\n${NONE}"
   brew install bison
   PATH="$(brew --prefix bison)/bin:$PATH"
   export PATH
 }
 
 install_package_xquartz() {
-  echo -e "${PURPLE}\t(6/10) Installing XQuartz\n${NONE}"
+  echo -e "${PURPLE}\t(6/11) Installing XQuartz\n${NONE}"
   brew install --cask xquartz
 }
 
 install_package_flex() {
-  echo -e "${PURPLE}\t(7/10) Installing Flex\n${NONE}"
+  echo -e "${PURPLE}\t(7/11) Installing Flex\n${NONE}"
   brew install flex
 }
 
 install_package_mingw_w64() {
-  echo -e "${PURPLE}\t(8/10) Installing Mingw-w64\n${NONE}"
+  echo -e "${PURPLE}\t(8/11) Installing Mingw-w64\n${NONE}"
   brew install mingw-w64
 }
 
 install_package_pkg_config() {
-  echo -e "${PURPLE}\t(9/10) Installing pkg-config\n${NONE}"
+  echo -e "${PURPLE}\t(9/11) Installing pkg-config\n${NONE}"
   brew install pkg-config
 }
 
 install_package_freetype() {
-  echo -e "${PURPLE}\t(10/10) Installing FreeType\n${NONE}"
+  echo -e "${PURPLE}\t(10/11) Installing FreeType\n${NONE}"
   brew install freetype
+}
+
+install_package_gnutls() {
+  echo -e "${PURPLE}\t(11/11) Installing GnuTLS\n${NONE}"
+  brew install gnutls
 }
 
 # ---
@@ -345,6 +350,7 @@ install_post_catalina() {
   install_package_mingw_w64
   install_package_pkg_config
   install_package_freetype
+  install_package_gnutls
 
   echo -e "${PURPLE}\tStep 3: Download and compile patched Wine CrossOver 21${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
