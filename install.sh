@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 NONE='\033[00m'
 PURPLE='\033[01;35m'
 RED='\033[0;31m'
@@ -114,26 +116,50 @@ download_crossover_21_patched() {
 unpack_crossover_21_tar() {
   echo -e "${PURPLE}\t(2/5) Unpacking and deleting src-crossover-wine-clang-0.0.1.tar.bz2${NONE}"
   sleep 3
-  tar -jxvf src-crossover-wine-clang-0.0.1.tar.bz2 && rm -f src-crossover-wine-clang-0.0.1.tar.bz2
+  tar -jxvf src-crossover-wine-clang-0.0.1.tar.bz2
+  rm -f src-crossover-wine-clang-0.0.1.tar.bz2
   cd /Users/"$CURRENT_USER"/swtor_tmp/src-crossover-wine-clang-0.0.1/ || exit
 }
 
 compile_llvm() {
   echo -e "${PURPLE}\t(3/5) Compile LLVM ${NONE}"
   sleep 3
-  cd clang/llvm && mkdir build && cd build && cmake ../ && make -j"$CORES_AVAILABLE" && cd bin && PATH="$(pwd):$PATH" && export PATH && cd ../../../..
+  cd clang/llvm
+  mkdir build
+  cd build
+  cmake ../
+  make -j"$CORES_AVAILABLE"
+  cd bin
+  PATH="$(pwd):$PATH"
+  export PATH
+  cd ../../../..
 }
 
 compile_clang() {
   echo -e "${PURPLE}\t(4/5) Compile Clang${NONE}"
   sleep 3
-  cd clang/clang && mkdir build && cd build && cmake ../ && make -j"$CORES_AVAILABLE" && cd bin && PATH="$(pwd):$PATH" && export PATH && cd ../../../..
+  cd clang/clang
+  mkdir build
+  cd build
+  cmake ../
+  make -j"$CORES_AVAILABLE"
+  cd bin
+  PATH="$(pwd):$PATH"
+  export PATH
+  cd ../../../..
 }
 
 compile_wine() {
   echo -e "${PURPLE}\t(5/5) Compile and install Wine${NONE}"
   sleep 3
-  cd wine && PATH="$(pwd):$PATH" && export PATH && export MACOSX_DEPLOYMENT_TARGET=10.14 && CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x --disable-tests --disable-mscms && make -j"$CORES_AVAILABLE" && echo -e "${PURPLE}\tMoving Wine binaries to /usr/local/bin/ (password may be required)${NONE}" && sudo make install-lib
+  cd wine
+  PATH="$(pwd):$PATH"
+  export PATH
+  export MACOSX_DEPLOYMENT_TARGET=10.14
+  CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x --disable-tests --disable-mscms
+  make -j"$CORES_AVAILABLE"
+  echo -e "${PURPLE}\tMoving Wine binaries to /usr/local/bin/ (password may be required)${NONE}"
+  sudo make install-lib
 }
 
 create_swtor_prefix() {
