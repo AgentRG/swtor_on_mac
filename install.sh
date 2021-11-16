@@ -25,7 +25,7 @@ fi
 
 create_temporary_downloads_folder() {
   echo -e "${PURPLE}\t(1/1) Creating temporary downloads folder\n${NONE}"
-  mkdir /Users/"$CURRENT_USER"/swtor_tmp
+  mkdir /Users/"$CURRENT_USER"/swtor_tmp || :
 }
 
 # Pre-Catalina Package Management
