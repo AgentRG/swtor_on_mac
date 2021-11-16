@@ -115,7 +115,6 @@ download_crossover_21_patched() {
 
 unpack_crossover_21_tar() {
   echo -e "${PURPLE}\t(2/5) Unpacking and deleting src-crossover-wine-clang-0.0.1.tar.bz2${NONE}"
-  sleep 3
   tar -jxvf src-crossover-wine-clang-0.0.1.tar.bz2
   rm -f src-crossover-wine-clang-0.0.1.tar.bz2
   cd /Users/"$CURRENT_USER"/swtor_tmp/src-crossover-wine-clang-0.0.1/ || exit
@@ -123,7 +122,6 @@ unpack_crossover_21_tar() {
 
 compile_llvm() {
   echo -e "${PURPLE}\t(3/5) Compile LLVM ${NONE}"
-  sleep 3
   cd clang/llvm
   mkdir build
   cd build
@@ -137,7 +135,6 @@ compile_llvm() {
 
 compile_clang() {
   echo -e "${PURPLE}\t(4/5) Compile Clang${NONE}"
-  sleep 3
   cd clang/clang
   mkdir build
   cd build
@@ -151,7 +148,6 @@ compile_clang() {
 
 compile_wine() {
   echo -e "${PURPLE}\t(5/5) Compile and install Wine${NONE}"
-  sleep 3
   cd wine
   PATH="$(pwd):$PATH"
   export PATH
