@@ -42,6 +42,7 @@ tap_into_agentrg_brew() {
 
 install_package_wine_stable() {
   echo -e "${PURPLE}\t(3/4) Installing latest Wine version${NONE}"
+  brew update
   brew install --cask --no-quarantine agentrg-wine-stable
 }
 
