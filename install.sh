@@ -265,6 +265,7 @@ install_pre_catalina() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   install_package_wget
+  tap_into_agentrg_brew
   install_package_wine_stable
   install_package_winetricks
 
