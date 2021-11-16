@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 NONE='\033[00m'
 PURPLE='\033[01;35m'
