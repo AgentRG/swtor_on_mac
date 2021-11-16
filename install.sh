@@ -5,8 +5,8 @@ set -ex
 NONE='\033[00m'
 PURPLE='\033[01;35m'
 RED='\033[0;31m'
-MACOS_HIGH_SIERRA=10.13
-MACOS_MOJAVE=10.14
+MACOS_HIGH_SIERRA=1013
+MACOS_MOJAVE=1014
 CURRENT_VERSION=$(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g")
 TOOLS_VERSION=$(xcode-select -p)
 TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
