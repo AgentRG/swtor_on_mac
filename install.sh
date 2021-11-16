@@ -14,6 +14,9 @@ XCODE_CHECK=$(ls /Applications/Xcode.app) || : # set -e can cause the script to 
 XCODE_INSTALLED="Contents"
 CORES_AVAILABLE=$(sysctl -n hw.physicalcpu)
 CURRENT_USER=$(whoami)
+CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-crossover/src-crossover-wine-clang-0.0.1.tar.bz2
+SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
+SWTOR_DOWNLOAD=http://www.swtor.com/download
 
 if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -eq 0 ]]; then
 	CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)00
@@ -111,18 +114,20 @@ install_package_freetype() {
 
 download_crossover_21_patched() {
   echo -e "${PURPLE}\t(1/5) Downloading patched CrossOver 21 from https://github.com/AgentRG/swtor_on_mac${NONE}"
-  wget https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-crossover/src-crossover-wine-clang-0.0.1.tar.bz2
+  wget $CROSSOVER_LINK
 }
 
 unpack_crossover_21_tar() {
   echo -e "${PURPLE}\t(2/5) Unpacking and deleting src-crossover-wine-clang-0.0.1.tar.bz2${NONE}"
   tar -jxvf src-crossover-wine-clang-0.0.1.tar.bz2
   rm -f src-crossover-wine-clang-0.0.1.tar.bz2
-  cd /Users/"$CURRENT_USER"/swtor_tmp/src-crossover-wine-clang-0.0.1/ || exit
+  cd "/Users/$CURRENT_USER/swtor_tmp/src-crossover-wine-clang-0.0.1/" || exit
 }
 
 compile_llvm() {
   echo -e "${PURPLE}\t(3/5) Compile LLVM ${NONE}"
+  DIR=$(pwd)
+  export DIR
   cd clang/llvm
   mkdir build
   cd build
@@ -131,11 +136,13 @@ compile_llvm() {
   cd bin
   PATH="$(pwd):$PATH"
   export PATH
-  cd ../../../..
+  cd "$DIR"
 }
 
 compile_clang() {
   echo -e "${PURPLE}\t(4/5) Compile Clang${NONE}"
+  DIR=$(pwd)
+  export DIR
   cd clang/clang
   mkdir build
   cd build
@@ -144,7 +151,7 @@ compile_clang() {
   cd bin
   PATH="$(pwd):$PATH"
   export PATH
-  cd ../../../..
+  cd "$DIR"
 }
 
 compile_wine() {
@@ -200,29 +207,29 @@ switch_all_dlls_to_builtin() {
 
 download_swtor() {
   echo -e "${PURPLE}\t(1/2) Downloading SWTOR_setup.exe from http://www.swtor.com/download${NONE}"
-  wget -O SWTOR_setup.exe http://www.swtor.com/download
+  wget -O SWTOR_setup.exe $SWTOR_DOWNLOAD
 }
 
 download_swtor_shortcut_zip() {
   echo -e "${PURPLE}\t(2/2) Downloading SWTOR.zip from https://github.com/AgentRG/swtor_on_mac/${NONE}"
-  wget https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
+  wget $SWTOR_CUSTOM_SHORTCUT_LINK
 }
 
 move_swtor_setup() {
   echo -e "${PURPLE}\t(1/2) Moving SWTOR_setup.exe to prefix folder${NONE}"
   if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
-    mv /Users/"$CURRENT_USER"/swtor_tmp/SWTOR_setup.exe /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/
+    mv "/Users/$CURRENT_USER/swtor_tmp/SWTOR_setup.exe" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files/"
   else
-    mv /Users/"$CURRENT_USER"//swtor_tmp/SWTOR_setup.exe /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+    mv "/Users/$CURRENT_USER/swtor_tmp/SWTOR_setup.exe" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files (x86)/"
   fi
 }
 
 move_swtor_shortcut_zip() {
   echo -e "${PURPLE}\t(2/2) Moving SWTOR.zip to prefix folder\n${NONE}"
   if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
-    mv /Users/"$CURRENT_USER"/swtor_tmp/SWTOR.zip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/
+    mv "/Users/$CURRENT_USER/swtor_tmp/SWTOR.zip" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files/"
   else
-    mv /Users/"$CURRENT_USER"/swtor_tmp/SWTOR.zip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
+    mv "/Users/$CURRENT_USER/swtor_tmp/SWTOR.zip" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files (x86)/"
   fi
 }
 
@@ -234,23 +241,23 @@ delete_temporary_downloads_folder() {
 unzip_swtor_app() {
   echo -e "${PURPLE}\t(1/2) Unzip SWTOR.zip\n${NONE}"
   if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
-      unzip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/SWTOR.zip
+      unzip "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files/SWTOR.zip"
   else
-      unzip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
+      unzip "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files (x86)/SWTOR.zip"
   fi
 }
 
 move_swtor_app_to_desktop() {
   echo -e "${PURPLE}\t(2/2) Move SWTOR.app to Desktop\n${NONE}"
-  mv /Users/"$CURRENT_USER"/SWTOR.app /Users/"$CURRENT_USER"/Desktop/
+  mv "/Users/$CURRENT_USER/SWTOR.app" "/Users/$CURRENT_USER/Desktop/"
 }
 
 launch_swtor() {
   echo -e "${PURPLE}\tLaunching SWTOR_setup.exe...${NONE}"
   if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
-    WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine32on64 /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/SWTOR_setup.exe >/dev/null 2>&1
+    WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine32on64 "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files/SWTOR_setup.exe" >/dev/null 2>&1
   else
-    WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR_setup.exe >/dev/null 2>&1
+    WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/Program Files (x86)/SWTOR_setup.exe" >/dev/null 2>&1
     fi
 }
 
@@ -292,10 +299,10 @@ install_pre_catalina() {
   echo -e "${PURPLE}\tStep 6: Download SWTOR executable${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
-  cd /Users/"$CURRENT_USER"/swtor_tmp/ || exit
+  cd "/Users/$CURRENT_USER/swtor_tmp/" || exit
   download_swtor
   download_swtor_shortcut_zip
-  cd /Users/"$CURRENT_USER"/ || exit
+  cd "/Users/$CURRENT_USER/" || exit
 
   echo -e "${PURPLE}\tStep 7: Move executables and icon and move to prefix folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
@@ -344,13 +351,13 @@ install_post_catalina() {
   echo -e "${PURPLE}\tStep 3: Download and compile patched Wine CrossOver 21${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  cd /Users/"$CURRENT_USER"/swtor_tmp/ || exit
+  cd "/Users/$CURRENT_USER/swtor_tmp/" || exit
   download_crossover_21_patched
   unpack_crossover_21_tar
   compile_llvm
   compile_clang
   compile_wine
-  cd /Users/"$CURRENT_USER"/ || exit
+  cd "/Users/$CURRENT_USER/" || exit
 
   echo -e "${PURPLE}\tStep 4: Create custom Wine prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
@@ -375,10 +382,10 @@ install_post_catalina() {
   echo -e "${PURPLE}\tStep 7: Download SWTOR executable${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
-  cd /Users/"$CURRENT_USER"/swtor_tmp/ || exit
+  cd "/Users/$CURRENT_USER/swtor_tmp/" || exit
   download_swtor
   download_swtor_shortcut_zip
-  cd /Users/"$CURRENT_USER"/ || exit
+  cd "/Users/$CURRENT_USER/" || exit
 
   echo -e "${PURPLE}\tStep 8: Move executables and icon and move to prefix folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
