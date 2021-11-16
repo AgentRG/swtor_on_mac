@@ -6,7 +6,7 @@ NONE='\033[00m'
 PURPLE='\033[01;35m'
 RED='\033[0;31m'
 MACOS_HIGH_SIERRA=1013
-MACOS_MOJAVE=1014
+MACOS_CATALINA=1015
 CURRENT_VERSION=$(sw_vers -productVersion | awk '{print $1}' | sed "s:.[[:digit:]]*.$::g")
 TOOLS_VERSION=$(xcode-select -p)
 TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
@@ -160,7 +160,7 @@ compile_wine() {
 
 create_swtor_prefix() {
   echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix\n${NONE}"
-  if [[ $CURRENT_VERSION_COMBINED -gt $MACOS_MOJAVE ]]; then
+  if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
     WINEARCH=win32 WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine32on64 wineboot
   else
     WINEARCH=win64 WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine wineboot
@@ -209,7 +209,7 @@ download_swtor_shortcut_zip() {
 
 move_swtor_setup() {
   echo -e "${PURPLE}\t(1/2) Moving SWTOR_setup.exe to prefix folder${NONE}"
-  if [[ $CURRENT_VERSION_COMBINED -gt $MACOS_MOJAVE ]]; then
+  if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
     mv /Users/"$CURRENT_USER"/swtor_tmp/SWTOR_setup.exe /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/
   else
     mv /Users/"$CURRENT_USER"//swtor_tmp/SWTOR_setup.exe /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
@@ -218,7 +218,7 @@ move_swtor_setup() {
 
 move_swtor_shortcut_zip() {
   echo -e "${PURPLE}\t(2/2) Moving SWTOR.zip to prefix folder\n${NONE}"
-  if [[ $CURRENT_VERSION_COMBINED -gt $MACOS_MOJAVE ]]; then
+  if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
     mv /Users/"$CURRENT_USER"/swtor_tmp/SWTOR.zip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/
   else
     mv /Users/"$CURRENT_USER"/swtor_tmp/SWTOR.zip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/
@@ -232,7 +232,7 @@ delete_temporary_downloads_folder() {
 
 unzip_swtor_app() {
   echo -e "${PURPLE}\t(1/2) Unzip SWTOR.zip\n${NONE}"
-  if [[ $CURRENT_VERSION_COMBINED -gt $MACOS_MOJAVE ]]; then
+  if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
       unzip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/SWTOR.zip
   else
       unzip /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR.zip
@@ -246,7 +246,7 @@ move_swtor_app_to_desktop() {
 
 launch_swtor() {
   echo -e "${PURPLE}\tLaunching SWTOR_setup.exe...${NONE}"
-  if [[ $CURRENT_VERSION_COMBINED -gt $MACOS_MOJAVE ]]; then
+  if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
     WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine32on64 /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files/SWTOR_setup.exe >/dev/null 2>&1
   else
     WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" wine /Users/"$CURRENT_USER"/SWTOR\ On\ Mac/drive_c/Program\ Files\ \(x86\)/SWTOR_setup.exe >/dev/null 2>&1
@@ -417,7 +417,7 @@ if [ "$TOOLS_VERSION" = "$TOOLS_INSTALLED" ] || [ "$XCODE_CHECK" = "$XCODE_INSTA
   if [[ $(command -v brew) == "" ]]; then
     echo -e "${RED}\tERROR: Homebrew not installed. Exiting.${NONE}"
   else
-    if [[ $CURRENT_VERSION_COMBINED -gt $MACOS_MOJAVE ]]; then
+    if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
       install_post_catalina
     else
       install_pre_catalina
