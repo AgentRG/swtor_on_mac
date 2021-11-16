@@ -358,7 +358,7 @@ install_post_catalina() {
   echo -e "${PURPLE}\tStep 5: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  export WINE=wine32on64
+  export WINE=wine32on64 # required to fool winetricks into using wine32on64
   install_dll_vcrun2008
   install_dll_crypt32
   install_dll_d3dx9_36
