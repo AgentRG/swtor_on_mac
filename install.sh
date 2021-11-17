@@ -169,6 +169,10 @@ compile_wine() {
   sudo make install-lib
 }
 
+backup_makefile() {
+  cp ./"Makefile" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/"
+}
+
 create_swtor_prefix() {
   echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix\n${NONE}"
   if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
@@ -361,12 +365,12 @@ install_post_catalina() {
   compile_llvm
   compile_clang
   compile_wine
-  cd "/Users/$CURRENT_USER/" || exit
 
   echo -e "${PURPLE}\tStep 4: Create custom Wine prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   create_swtor_prefix
+  backup_makefile
 
   echo -e "${PURPLE}\tStep 5: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
