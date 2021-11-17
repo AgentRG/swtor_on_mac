@@ -173,6 +173,7 @@ compile_wine() {
 }
 
 backup_wine() {
+  echo -e "${PURPLE}\t(1/1) Backing up Wine for uninstall\n${NONE}"
   cp -R "$DIR/wine" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/"
 }
 
@@ -373,9 +374,13 @@ install_post_catalina() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   create_swtor_prefix
+
+  echo -e "${PURPLE}\tStep 5: Backup Wine folder for uninstallation${NONE}"
+  echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
+
   backup_wine
 
-  echo -e "${PURPLE}\tStep 5: Install DLLs to prefix${NONE}"
+  echo -e "${PURPLE}\tStep 6: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   export WINE=wine32on64 # required to fool winetricks into using wine32on64
@@ -383,14 +388,14 @@ install_post_catalina() {
   install_dll_crypt32
   install_dll_d3dx9_36
 
-  echo -e "${PURPLE}\tStep 6: Change prefix settings${NONE}"
+  echo -e "${PURPLE}\tStep 7: Change prefix settings${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   set_vram
   switch_windows_version
   switch_all_dlls_to_builtin
 
-  echo -e "${PURPLE}\tStep 7: Download SWTOR executable${NONE}"
+  echo -e "${PURPLE}\tStep 8: Download SWTOR executable${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   cd "/Users/$CURRENT_USER/swtor_tmp/" || exit
@@ -398,18 +403,18 @@ install_post_catalina() {
   download_swtor_shortcut_zip
   cd "/Users/$CURRENT_USER/" || exit
 
-  echo -e "${PURPLE}\tStep 8: Move executables and icon and move to prefix folder${NONE}"
+  echo -e "${PURPLE}\tStep 9: Move executables and icon and move to prefix folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   move_swtor_setup
   move_swtor_shortcut_zip
 
-  echo -e "${PURPLE}\tStep 9: Delete temporary downloads folder${NONE}"
+  echo -e "${PURPLE}\tStep 10: Delete temporary downloads folder${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   delete_temporary_downloads_folder
 
-  echo -e "${PURPLE}\tStep 10: Unzip SWTOR.zip and move application to Desktop${NONE}"
+  echo -e "${PURPLE}\tStep 11: Unzip SWTOR.zip and move application to Desktop${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   unzip_swtor_app
