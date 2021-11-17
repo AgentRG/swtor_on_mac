@@ -170,7 +170,7 @@ compile_wine() {
 }
 
 backup_makefile() {
-  cp ./"Makefile" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/"
+  cp "./Makefile" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/"
 }
 
 create_swtor_prefix() {
