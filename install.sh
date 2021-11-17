@@ -159,6 +159,8 @@ compile_clang() {
 
 compile_wine() {
   echo -e "${PURPLE}\t(5/5) Compile and install Wine${NONE}"
+  DIR=$(pwd)
+  export DIR
   cd wine
   PATH="$(pwd):$PATH"
   export PATH
@@ -167,10 +169,11 @@ compile_wine() {
   make -j"$CORES_AVAILABLE"
   echo -e "${PURPLE}\tMoving Wine binaries to /usr/local/bin/ (password may be required)${NONE}"
   sudo make install-lib
+  cd "$DIR"
 }
 
-backup_makefile() {
-  cp "./Makefile" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/"
+backup_wine() {
+  cp -R "$DIR/wine" "/Users/$CURRENT_USER/SWTOR On Mac/drive_c/"
 }
 
 create_swtor_prefix() {
@@ -370,7 +373,7 @@ install_post_catalina() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   create_swtor_prefix
-  backup_makefile
+  backup_wine
 
   echo -e "${PURPLE}\tStep 5: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
