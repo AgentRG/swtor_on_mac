@@ -12,6 +12,17 @@ Prerequisite:
 ### Uninstall SWTOR On Mac
 SWTOR On Mac can be uninstalled by simply moving the prefix folder to Trash.
 
+To uninstall Wine:
+
+macOS Mojave and earlier ( ≥ 10.14 )
+* `brew uninstall agentrg-wine-stable`
+
+macOS Catalina and after ( 10.15 ≤ )
+
+* `cd to/where/swtor/on/mac/is`
+* `cd drive_c/wine/`
+* `sudo make uninstall`
+
 If you also want to uninstall Homebrew and all the dependencies installed by it, run the following commands:
 1. ```brew list | xargs brew uninstall --force```
 2. ```ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"```
