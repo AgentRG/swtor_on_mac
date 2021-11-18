@@ -14,7 +14,7 @@ SWTOR On Mac can be uninstalled by simply moving the prefix folder to Trash.
 
 To uninstall Wine:
 
-macOS Mojave and earlier ( ≥ 10.14 )
+macOS Mojave and earlier ( ≤ 10.14 )
 * `brew uninstall agentrg-wine-stable`
 
 macOS Catalina and after ( 10.15 ≤ )
