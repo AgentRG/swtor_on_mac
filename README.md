@@ -1,6 +1,9 @@
 # SWTOR On Mac [![Github All Releases](https://img.shields.io/github/downloads/agentrg/swtor_on_mac/total?color=%2376BA1B&style=for-the-badge)]()
 Script written for macOS using Homebrew / Winetricks to install everything required for Star Wars: The Old Republic up to the point where the installer is launched.
 
+![Untitled1](https://user-images.githubusercontent.com/23729455/142350151-69209849-bdc2-4ec8-a8d3-1e665cd49989.png)
+
+
 ### Install SWTOR On Mac
 ``` bash
 curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/install.sh | bash
