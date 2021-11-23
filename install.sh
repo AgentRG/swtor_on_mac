@@ -172,6 +172,15 @@ compile_wine() {
   cd "$DIR"
 }
 
+check_if_wine_installed() {
+  if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
+    if [[ $(wine32on64 --version) != "wine-6.0" ]]; then
+      echo -e "${RED}\tERROR: Crossover Wine didn't get installed. Please check for errors in the output. Exiting.${NONE}"
+      exit
+    fi
+  fi
+}
+
 create_swtor_prefix() {
   echo -e "${PURPLE}\t(1/1) Creating "SWTOR On Mac" Wine prefix\n${NONE}"
   if [[ $CURRENT_VERSION_COMBINED -ge $MACOS_CATALINA ]]; then
@@ -281,6 +290,7 @@ install_pre_catalina() {
   install_package_wget
   tap_into_agentrg_brew
   install_package_wine_stable
+  check_if_wine_installed
   install_package_winetricks
 
   echo -e "${PURPLE}\tStep 3: Create custom Wine prefix${NONE}"
@@ -364,6 +374,7 @@ install_post_catalina() {
   compile_llvm
   compile_clang
   compile_wine
+  check_if_wine_installed
 
   echo -e "${PURPLE}\tStep 4: Create custom Wine prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
