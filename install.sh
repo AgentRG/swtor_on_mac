@@ -10,7 +10,6 @@ TOOLS_VERSION=$(xcode-select -p)
 TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
 XCODE_CHECK=$(ls /Applications/Xcode.app) || : # set -e can cause the script to die here, so added || : to skip fail
 XCODE_INSTALLED="Contents"
-CORES_AVAILABLE=$(sysctl -n hw.physicalcpu)
 CURRENT_USER=$(whoami)
 CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-crossover/src-crossover-wine-clang-0.0.1.tar.bz2
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
@@ -135,7 +134,7 @@ compile_llvm() {
   mkdir build
   cd build
   cmake ../
-  make -j"$CORES_AVAILABLE"
+  make
   cd bin
   PATH="$(pwd):$PATH"
   export PATH
@@ -150,7 +149,7 @@ compile_clang() {
   mkdir build
   cd build
   cmake ../
-  make -j"$CORES_AVAILABLE"
+  make
   cd bin
   PATH="$(pwd):$PATH"
   export PATH
@@ -166,7 +165,7 @@ compile_wine() {
   export PATH
   export MACOSX_DEPLOYMENT_TARGET=10.14
   CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x --disable-tests --disable-mscms
-  make -j"$CORES_AVAILABLE"
+  make
   echo -e "${PURPLE}\tMoving Wine binaries to /usr/local/bin/ (password may be required)${NONE}"
   sudo make install-lib
   cd "$DIR"
