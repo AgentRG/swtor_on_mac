@@ -11,7 +11,8 @@ TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
 XCODE_CHECK=$(ls /Applications/Xcode.app) || : # set -e can cause the script to die here, so added || : to skip fail
 XCODE_INSTALLED="Contents"
 CURRENT_USER=$(whoami)
-CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-wine-crossover/src-crossover-wine-clang-0.0.2.tar.bz2
+CROSSOVER_TAR=src-crossover-wine-clang-0.0.3.tar.bz2
+CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-wine-crossover/$CROSSOVER_TAR
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 SWTOR_DOWNLOAD=http://www.swtor.com/download
 
@@ -120,9 +121,9 @@ download_crossover_21_patched() {
 }
 
 unpack_crossover_21_tar() {
-  echo -e "${PURPLE}\t(2/5) Unpacking and deleting src-crossover-wine-clang-0.0.2.tar.bz2${NONE}"
-  tar -jxvf src-crossover-wine-clang-0.0.2.tar.bz2
-  rm -f src-crossover-wine-clang-0.0.2.tar.bz2
+  echo -e "${PURPLE}\t(2/5) Unpacking and deleting $CROSSOVER_TAR${NONE}"
+  tar -jxvf $CROSSOVER_TAR
+  rm -f $CROSSOVER_TAR
   cd "/Users/$CURRENT_USER/swtor_tmp/sources/" || exit
 }
 
