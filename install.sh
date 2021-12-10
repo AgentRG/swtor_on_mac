@@ -16,9 +16,9 @@ CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-win
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 SWTOR_DOWNLOAD=http://www.swtor.com/download
 
-if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2) -eq 0 ]]; then
-	CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)00
-	export CURRENT_VERSION_COMBINED
+if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2 | wc -c) -eq 2 ]]; then
+  CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)0$(echo "${CURRENT_VERSION}" | cut -d"." -f2)
+  export CURRENT_VERSION_COMBINED
 else
 	CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)$(echo "${CURRENT_VERSION}" | cut -d"." -f2)
 	export CURRENT_VERSION_COMBINED
