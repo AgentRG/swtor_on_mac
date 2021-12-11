@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env arch -x86_64 bash
+
+set -e
 
 NONE='\033[00m'
 PURPLE='\033[01;35m'
