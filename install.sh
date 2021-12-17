@@ -17,6 +17,7 @@ CROSSOVER_TAR=src-crossover-wine-clang-0.0.3.tar.bz2
 CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-wine-crossover/$CROSSOVER_TAR
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 SWTOR_DOWNLOAD=http://www.swtor.com/download
+CPU_ARCHITECTURE=$(sysctl -n machdep.cpu.brand_string)
 
 if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2 | wc -c) -eq 2 ]]; then
   CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)0$(echo "${CURRENT_VERSION}" | cut -d"." -f2)
@@ -81,7 +82,12 @@ install_package_gcc() {
 install_package_bison() {
   echo -e "${PURPLE}\t(5/11) Installing Bison\n${NONE}"
   brew install bison
-  PATH="$(brew --prefix bison)/bin:$PATH"
+  # Homebrew packages in Apple Silicon are installed under /opt/homebrew/opt/
+  if [[ $CPU_ARCHITECTURE == *"M1"* ]]; then
+    PATH="/opt/homebrew/opt/bison/bin:$PATH"
+  else
+    PATH="$(brew --prefix bison)/bin:$PATH"
+  fi
   export PATH
 }
 
