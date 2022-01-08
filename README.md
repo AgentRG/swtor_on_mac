@@ -30,4 +30,4 @@ Note: To uninstall Wine, you'll need to recompile LLVM/Clang/Wine from the sourc
 
 If you also want to uninstall Homebrew and all the dependencies installed by it, run the following commands:
 1. ```brew list | xargs brew uninstall --force```
-2. ``/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
+2. ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
