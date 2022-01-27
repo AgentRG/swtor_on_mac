@@ -18,6 +18,7 @@ CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-win
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 SWTOR_DOWNLOAD=http://www.swtor.com/download
 CPU_ARCHITECTURE=$(sysctl -n machdep.cpu.brand_string)
+CORES_AVAILABLE=$(sysctl -n hw.physicalcpu)
 
 if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2 | wc -c) -eq 2 ]]; then
   CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)0$(echo "${CURRENT_VERSION}" | cut -d"." -f2)
@@ -143,7 +144,7 @@ compile_llvm() {
   mkdir build
   cd build
   cmake ../
-  make
+  make -j"$CORES_AVAILABLE"
   cd bin
   PATH="$(pwd):$PATH"
   export PATH
@@ -158,7 +159,7 @@ compile_clang() {
   mkdir build
   cd build
   cmake ../
-  make
+  make -j"$CORES_AVAILABLE"
   cd bin
   PATH="$(pwd):$PATH"
   export PATH
@@ -177,7 +178,7 @@ compile_wine() {
   --disable-tests --disable-mscms --without-sane --without-alsa --without-capi --without-dbus --without-inotify \
   --without-oss --without-pulse --without-udev --without-v4l2 --without-cms --without-gstreamer --without-gsm \
   --without-gphoto --with-mingw --without-krb5 --without-vkd3d --without-vulkan --disable-vulkan_1 --disable-winevulkan
-  make
+  make -j"$CORES_AVAILABLE"
   echo -e "${PURPLE}\tMoving Wine binaries to /usr/local/bin/ (password may be required)${NONE}"
   sudo make install-lib
   cd "$DIR"
