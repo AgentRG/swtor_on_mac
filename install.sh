@@ -140,7 +140,7 @@ compile_llvm() {
   DIR=$(pwd)
   export DIR
   cd clang/llvm
-  mkdir build || rm -r build && mkdir build
+  mkdir build || (rm -r build && mkdir build)
   cd build
   cmake ../
   make
@@ -155,7 +155,7 @@ compile_clang() {
   DIR=$(pwd)
   export DIR
   cd clang/clang
-  mkdir build || rm -r build && mkdir build
+  mkdir build || (rm -r build && mkdir build)
   cd build
   cmake ../
   make
