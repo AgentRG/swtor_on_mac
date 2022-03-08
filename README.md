@@ -17,6 +17,7 @@ curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/install_sw
 Prerequisite:
 1. macOS High Sierra or later
 2. Have both [Command Line Tools](https://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/ "How to Install Command Line Tools") and [Homebrew](https://github.com/Homebrew/install "Homebrew GitHub Page") installed.
+3. At least 70GB of free storage space.
 
 ### Uninstall SWTOR On Mac
 SWTOR On Mac can be uninstalled by simply moving the prefix folder to Trash.
