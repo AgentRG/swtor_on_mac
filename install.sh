@@ -124,7 +124,7 @@ install_package_gnutls() {
 # ---
 
 download_crossover_21_patched() {
-  echo -e "${PURPLE}\t(1/5) Downloading patched CrossOver 21.1.0 from https://github.com/AgentRG/swtor_on_mac${NONE}"
+  echo -e "${PURPLE}\t(1/5) Downloading patched CrossOver 21.2.0 from https://github.com/AgentRG/swtor_on_mac${NONE}"
   wget $CROSSOVER_LINK
 }
 
