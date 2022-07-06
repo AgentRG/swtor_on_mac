@@ -13,8 +13,8 @@ TOOLS_INSTALLED="/Library/Developer/CommandLineTools"
 XCODE_CHECK=$(ls /Applications/Xcode.app) || : # set -e can cause the script to die here, so added || : to skip fail
 XCODE_INSTALLED="Contents"
 CURRENT_USER=$(whoami)
-CROSSOVER_TAR=src-crossover-wine-clang-0.0.3.tar.bz2
-CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/6.0-wine-crossover/$CROSSOVER_TAR
+CROSSOVER_TAR=src-crossover-wine-clang-0.0.4.tar.bz2
+CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/7.0-wine-crossover/$CROSSOVER_TAR
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 SWTOR_DOWNLOAD=http://www.swtor.com/download
 CPU_ARCHITECTURE=$(sysctl -n machdep.cpu.brand_string)
@@ -124,7 +124,7 @@ install_package_gnutls() {
 # ---
 
 download_crossover_21_patched() {
-  echo -e "${PURPLE}\t(1/5) Downloading patched CrossOver 21.1.0 from https://github.com/AgentRG/swtor_on_mac${NONE}"
+  echo -e "${PURPLE}\t(1/5) Downloading patched CrossOver 21.2.0 from https://github.com/AgentRG/swtor_on_mac${NONE}"
   wget $CROSSOVER_LINK
 }
 
@@ -142,7 +142,7 @@ compile_llvm() {
   cd clang/llvm
   mkdir build || (rm -r build && mkdir build)
   cd build
-  cmake ../
+  cmake ../ -DPYTHON_EXECUTABLE:FILEPATH="$(which python3)"
   make
   cd bin
   PATH="$(pwd):$PATH"
@@ -157,7 +157,7 @@ compile_clang() {
   cd clang/clang
   mkdir build || (rm -r build && mkdir build)
   cd build
-  cmake ../
+  cmake ../ -DPYTHON_EXECUTABLE:FILEPATH="$(which python3)"
   make
   cd bin
   PATH="$(pwd):$PATH"
