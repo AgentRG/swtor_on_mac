@@ -176,7 +176,8 @@ compile_wine() {
   CC="clang" CXX="clang++" MACOSX_DEPLOYMENT_TARGET=10.14 ./configure --enable-win32on64 -disable-winedbg --without-x \
   --disable-tests --disable-mscms --without-sane --without-alsa --without-capi --without-dbus --without-inotify \
   --without-oss --without-pulse --without-udev --without-v4l2 --without-cms --without-gstreamer --without-gsm \
-  --without-gphoto --with-mingw --without-krb5 --without-vkd3d --without-vulkan --disable-vulkan_1 --disable-winevulkan
+  --without-gphoto --with-mingw --without-krb5 --without-vkd3d --without-vulkan --disable-vulkan_1 --disable-winevulkan \
+  --without-freetype
   make
   echo -e "${PURPLE}\tMoving Wine binaries to /usr/local/bin/ (password may be required)${NONE}"
   sudo make install-lib
