@@ -78,7 +78,7 @@ download_crossover_21_binaries() {
 unpack_crossover_21_tar() {
   echo -e "${PURPLE}\t(2/2) Unpacking and moving CrossOver 21.2.0 binaries (Password may be required)${NONE}"
   cd / || exit
-  sudo tar -jxvf "/Users/$CURRENT_USER/swtor_tmp/$CROSSOVER_TAR" 2 > /dev/null
+  sudo 'tar -jxvf "/Users/$CURRENT_USER/swtor_tmp/$CROSSOVER_TAR" 2 > /dev/null'
   cd "/Users/$CURRENT_USER/swtor_tmp" || exit
   rm -f $CROSSOVER_TAR
 }
