@@ -322,7 +322,7 @@ install_post_catalina() {
   unzip_swtor_app
   move_swtor_app_to_desktop
 
-  echo -e "${PURPLE}\tSWTOR On Mac Installation Finished Successfully!${NONE}"
+  echo -e "${PURPLE}\tSWTOR On Mac Installation Finished Successfully! A shortcut was placed to your desktop.${NONE}"
 
   launch_swtor
 }
