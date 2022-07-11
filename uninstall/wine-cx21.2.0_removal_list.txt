@@ -1,3 +1,4 @@
+cd /
 rm ./usr/local/share/wine/wine.inf
 rm ./usr/local/share/wine/fonts/webdings.ttf
 rm ./usr/local/share/wine/fonts/hvgasys.fon
