@@ -226,7 +226,7 @@ install_pre_catalina() {
   switch_all_dlls_to_builtin
 
   echo -e "${PURPLE}\tStep 6: Download SWTOR executable${NONE}"
-  echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
+  echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾${NONE}"
 
   cd "/Users/$CURRENT_USER/swtor_tmp/" || exit
   download_swtor
