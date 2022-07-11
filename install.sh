@@ -17,6 +17,8 @@ CROSSOVER_TAR=wine-cx21.2.0.tar.bz2
 CROSSOVER_LINK=https://github.com/AgentRG/swtor_on_mac/releases/download/wine-cx21.2.0/$CROSSOVER_TAR
 SWTOR_CUSTOM_SHORTCUT_LINK=https://github.com/AgentRG/swtor_on_mac/raw/master/SWTOR.zip
 SWTOR_DOWNLOAD=http://www.swtor.com/download
+export CURRENT_USER
+export CROSSOVER_TAR
 
 if [[ $(echo "${CURRENT_VERSION}" | cut -d"." -f2 | wc -c) -eq 2 ]]; then
   CURRENT_VERSION_COMBINED=$(echo "${CURRENT_VERSION}" | cut -d"." -f1)0$(echo "${CURRENT_VERSION}" | cut -d"." -f2)
@@ -78,7 +80,7 @@ download_crossover_21_binaries() {
 unpack_crossover_21_tar() {
   echo -e "${PURPLE}\t(2/2) Unpacking and moving CrossOver 21.2.0 binaries (Password may be required)${NONE}"
   cd / || exit
-  sudo 'tar -jxvf "/Users/$CURRENT_USER/swtor_tmp/$CROSSOVER_TAR" 2 > /dev/null'
+  sudo bash -c "tar -jxvf '/Users/$CURRENT_USER/swtor_tmp/$CROSSOVER_TAR' 2 > /dev/null"
   cd "/Users/$CURRENT_USER/swtor_tmp" || exit
   rm -f $CROSSOVER_TAR
 }
