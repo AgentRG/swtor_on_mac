@@ -29,7 +29,7 @@ macOS Mojave and earlier ( ≤ 10.14 )
 
 macOS Catalina and after ( 10.15 ≤ )
 
-* `curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/AgentRG-patch-32/uninstall/uninstall.sh | bash`
+* `curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/uninstall/uninstall.sh | bash`
 
 
 If you also want to uninstall Homebrew and all the dependencies installed by it, run the following commands:
