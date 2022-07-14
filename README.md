@@ -29,11 +29,8 @@ macOS Mojave and earlier ( ≤ 10.14 )
 
 macOS Catalina and after ( 10.15 ≤ )
 
-Note: To uninstall Wine, you'll need to recompile LLVM/Clang/Wine from the sources folder to create Wine's Makefile since the script deletes the source folder once `make install-lib` ran successfully (otherwise ~20GB is wasted just to keep the sources folder)
+* `curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/uninstall/uninstall.sh | bash`
 
-* `cd to/sources/folder`
-* `cd wine/`
-* `sudo make uninstall`
 
 If you also want to uninstall Homebrew and all the dependencies installed by it, run the following commands:
 1. ```brew list | xargs brew uninstall --force```
