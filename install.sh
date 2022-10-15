@@ -334,7 +334,7 @@ check_if_not_high_sierra_or_earlier() {
     fi
 }
 
-echo -e "${PURPLE}\tAgentRG's SWTOR On Mac\n${NONE}"
+echo -e "${PURPLE}\tSWTOR On Mac\n${NONE}"
 
 check_if_not_high_sierra_or_earlier
 
