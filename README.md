@@ -9,7 +9,7 @@ Script written for macOS using Homebrew / Winetricks to install everything requi
 curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/install.sh | bash
 ```
 
-### Install SWTOR On Mac without Wine (assuming Wine/Wine32on64 is already installed):
+### Install SWTOR On Mac without Wine (assuming Wine/Wine32on64 is installed):
 ```bash
 curl -s https://raw.githubusercontent.com/AgentRG/swtor_on_mac/master/install_swtor.sh | bash
 ```
