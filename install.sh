@@ -103,9 +103,9 @@ create_swtor_prefix() {
   fi
 }
 
-install_dll_vcrun2008() {
-  echo -e "${PURPLE}\t(1/3) Installing vcrun2008${NONE}"
-  env WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" sh winetricks -q vcrun2008
+install_dll_vcrun2015() {
+  echo -e "${PURPLE}\t(1/3) Installing vcrun2015${NONE}"
+  env WINEPREFIX="/Users/$CURRENT_USER/SWTOR On Mac" sh winetricks -q vcrun2015
 }
 
 install_dll_crypt32() {
@@ -214,7 +214,7 @@ install_pre_catalina() {
   echo -e "${PURPLE}\tStep 4: Install DLLs to prefix${NONE}"
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
-  install_dll_vcrun2008
+  install_dll_vcrun2015
   install_dll_crypt32
   install_dll_d3dx9_36
 
@@ -286,7 +286,7 @@ install_post_catalina() {
   echo -e "${PURPLE}\t‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ‾ ${NONE}"
 
   export WINE=wine32on64 # required to fool winetricks into using wine32on64
-  install_dll_vcrun2008
+  install_dll_vcrun2015
   install_dll_crypt32
   install_dll_d3dx9_36
 
