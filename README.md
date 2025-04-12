@@ -1,3 +1,5 @@
+### As of April 11th, 2025, this repository is now officially archived as there is an official Mac client available for SWTOR. Thank you for participating with me in this journey!
+
 # SWTOR On Mac [![Github All Releases](https://img.shields.io/github/downloads/agentrg/swtor_on_mac/total?color=%2376BA1B&style=for-the-badge)]()
 Script written for macOS using Homebrew / Winetricks to install everything required for Star Wars: The Old Republic up to the point where the installer is launched.
 
